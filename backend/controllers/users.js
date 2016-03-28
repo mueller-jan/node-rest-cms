@@ -21,21 +21,20 @@ module.exports = function () {
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     controller.addAction('POST', 'users/:id/authenticate', function (req, res, next) {
         var id = req.params.id;
-        console.log(id);
         if (id) {
             // find the user
             User.findOne({_id: id})
                 .exec(function (err, user) {
 
-                    if (err) throw err;
+                    if (err) return next(controller.RESTError('InternalServerError', err));
 
                     if (!user) {
-                        res.json({success: false, message: 'Authentication failed. User not found.'});
+                        return next(controller.RESTError('Authentication failed. User not found.', err));
                     } else if (user) {
 
                         // check if password matches
                         if (user.password != req.body.password) {
-                            res.json({success: false, message: 'Authentication failed. Wrong password.'});
+                            return next(controller.RESTError('Authentication failed. Wrong password.', err));
                         } else {
 
                             // if user is found and password is right
@@ -45,7 +44,7 @@ module.exports = function () {
                             });
 
                             // return the information including token as JSON
-                            res.json({
+                            res.send({
                                 success: true,
                                 message: 'Enjoy your token!',
                                 token: token
@@ -53,7 +52,6 @@ module.exports = function () {
                         }
 
                     }
-
                 });
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id'));
