@@ -1,0 +1,11 @@
+<md-toolbar layout="row" layout-align="start center">
+    <span> <h2 class="md-toolbar-tools"> Node Rest CMS </h2></span>
+    <span>
+        <md-button md-ripple-size="full" ng-repeat="item in menuItems" ui-sref="main.page({id: item.slug})"
+                   aria-label="{{item.title}}"> {{item.title}}
+        </md-button>
+         <md-button class="md-raised" ui-sref="admin">
+             ADMIN-AREA
+         </md-button>
+    </span>
+</md-toolbar>

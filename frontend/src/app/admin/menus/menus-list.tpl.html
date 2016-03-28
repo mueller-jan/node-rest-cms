@@ -1,0 +1,5 @@
+<ul>
+    <li ng-repeat="menu in menus">{{menu.name}} <a ui-sref="admin.menus-edit({id: menu._id})">edit</a> <button ng-click="deleteMenu(menu._id)">delete</button> </li>
+</ul>
+
+

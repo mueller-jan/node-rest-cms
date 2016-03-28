@@ -1,0 +1,7 @@
+<ul>
+    <li ng-repeat="page in pages">{{page.slug}} <a ui-sref="admin.pages-edit({id: page.slug})">edit</a> <button ng-click="deletePage(page._id)">delete</button> </li>
+</ul></li>
+</ul>
+
+<a ui-sref="admin.pages-new">new Page</a>
+

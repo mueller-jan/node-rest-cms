@@ -1,0 +1,12 @@
+<form name="myForm" ng-submit="submit()">
+    Menu-Name: <input ng-model="menu.name"/>
+    <br/>
+    Pages to include:
+    <label ng-repeat="page in pages">
+        <br/>
+        <input type="checkbox" checklist-model="menu.items" checklist-value="page._id"> {{page.title}}
+    </label>
+    <br/>
+    <input type="submit" id="submit" value="Submit" />
+</form>
+
