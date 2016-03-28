@@ -1,6 +1,7 @@
 var BaseController = require('./basecontroller');
 var _ = require('underscore');
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
 
 function Users() {
 }
@@ -14,15 +15,12 @@ module.exports = function () {
         User.find({}, function (err, users) {
             res.json(users);
         });
-    });
+    }, true);
 
-
-    //TODO: refactor (name parameter) {"code":"InternalError","message":"Cannot read property 'password' of undefined"}
-    // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     controller.addAction('POST', 'users/:id/authenticate', function (req, res, next) {
         var id = req.params.id;
         if (id) {
-            // find the user
+            //find the user
             User.findOne({_id: id})
                 .exec(function (err, user) {
 
@@ -32,27 +30,27 @@ module.exports = function () {
                         return next(controller.RESTError('Authentication failed. User not found.', err));
                     } else if (user) {
 
-                        // check if password matches
-                        if (user.password != req.body.password) {
-                            return next(controller.RESTError('Authentication failed. Wrong password.', err));
-                        } else {
+                        //check if password matches
+                        user.comparePassword(req.body.password, function (err, isMatch) {
+                            if (isMatch && !err) {
 
-                            // if user is found and password is right
-                            // create a token
-                            var token = jwt.sign(user, config.secret, {
-                                expiresInMinutes: 1440 // expires in 24 hours
-                            });
+                                //if user is found and password is right create a token
+                                var token = jwt.sign(user, require('../lib').config.secret, {
+                                    expiresInMinutes: 1440 // expires in 24 hours
+                                });
 
-                            // return the information including token as JSON
-                            res.send({
-                                success: true,
-                                message: 'Enjoy your token!',
-                                token: token
-                            });
-                        }
-
+                                //return the information including token as JSON
+                                res.send({
+                                    success: true,
+                                    message: 'Token received',
+                                    token: token
+                                });
+                            } else {
+                                next(controller.RESTError('InvalidArgumentError', 'Invalid id'));
+                            }
+                        })
                     }
-                });
+                })
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id'));
         }

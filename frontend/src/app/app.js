@@ -18,7 +18,8 @@ var app = angular.module('app', [
         $httpProvider.defaults.headers.patch = {};
     }])
 
-    .run(function run() {
+    .run(function ($rootScope) {
+
     })
 
     .controller('AppCtrl', function AppCtrl($scope) {

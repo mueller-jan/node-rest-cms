@@ -13,7 +13,7 @@ module.exports = function () {
     //get pages
     controller.addAction('GET', '/pages', function (req, res, next) {
         Page.find().exec(function (err, list) {
-            if (err) return next(controller.RESTError('InternalServerError', err))
+            if (err) return next(controller.RESTError('InternalServerError', err));
             res.send(list);
         });
     });
@@ -55,7 +55,7 @@ module.exports = function () {
         } else {
             next(controller.RESTError('InvalidArgumentError', 'No data received'))
         }
-    });
+    }, true);
 
     //update page
     controller.addAction('PUT', '/pages/:id', function (req, res, next) {
@@ -74,7 +74,7 @@ module.exports = function () {
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))
         }
-    });
+    }, true);
 
     //delete page
     controller.addAction('DEL', '/pages/:id', function (req, res, next) {
@@ -91,7 +91,7 @@ module.exports = function () {
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))
         }
-    });
+    }, true);
 
     return controller;
 };

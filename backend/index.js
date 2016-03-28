@@ -2,9 +2,6 @@ var restify = require("restify");
 var lib = require("./lib");
 var config = lib.config;
 var colors = require("colors");
-var mongoose = require('mongoose');
-
-var jwt = require('jsonwebtoken');
 
 var server = restify.createServer(lib.config.server);
 
@@ -15,50 +12,22 @@ server.use(restify.queryParser());
 //an object, with the added bonus of autoparsing JSON strings.
 server.use(restify.bodyParser());
 
+//Cross Origin Resource Sharing
 restify.CORS.ALLOW_HEADERS.push('authorization');
 restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
 server.use(restify.CORS());
 
-// route middleware to verify a token
-//TODO: outsource to lib/authentication (Warning asynchronous!)
-//server.use(function(req, res, next) {
-//    // check header or url parameters or post parameters for token
-//    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-//
-//    // decode token
-//    if (token) {
-//        // verifies secret and checks exp
-//        jwt.verify(token, config.secret, function(err, decoded) {
-//            if (err) {
-//                return res.json({ success: false, message: 'Failed to authenticate token.' });
-//            } else {
-//                // if everything is good, save to request for use in other routes
-//                req.decoded = decoded;
-//                next();
-//            }
-//        });
-//
-//    } else {
-//
-//        // if there is no token
-//        // return an error
-//        return res.status(403).send({
-//            success: false,
-//            message: 'No token provided.'
-//        });
-//
-//    }
-//});
-
-
 server.get('/setup', function (req, res) {
+    var mongoose    = require('mongoose');
+    var User = require('./models/user');
     var nick = new User({
         name: 'Nick Cerminara',
         password: 'password',
         admin: true
     });
 
-    // save the sample user
+
+     //save the sample user
     nick.save(function (err) {
         if (err) throw err;
 
@@ -66,16 +35,13 @@ server.get('/setup', function (req, res) {
         res.json({success: true});
     });
 });
+//setup protected routes (authentication required)
+lib.helpers.setupRoutes(server, lib, false);
 
-
-
-
-
-//restify.defaultResponseHeaders = function (data) {
-//    this..header('Access-Control-Allow-Origin', '*');
-//};
-
-
+// route middleware to verify a token
+server.use(function (req, res, next) {
+    lib.helpers.validateToken(req, res, next);
+});
 
 //Validate each request, as long as there is a schema for it
 //server.use(function(req, res, next) {
@@ -87,7 +53,8 @@ server.get('/setup', function (req, res) {
 //    }
 //});
 
-lib.helpers.setupRoutes(server, lib);
+//setup protected routes (authentication required)
+lib.helpers.setupRoutes(server, lib, true);
 
 server.listen(config.server.port, function () {
     console.log("Server started succesfully...".green);

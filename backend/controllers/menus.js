@@ -22,7 +22,7 @@ module.exports = function () {
         } else {
             next(controller.RESTError('InvalidArgumentError', 'No data received'))
         }
-    });
+    }, true);
 
     //get menu
     controller.addAction('GET', '/menus/:id', function (req, res, next) {
@@ -48,7 +48,7 @@ module.exports = function () {
             if (err) return next(controller.RESTError('InternalServerError', err));
             res.send(list);
         });
-    });
+    }, true);
 
     //update menu
     controller.addAction('PUT', '/menus/:id', function (req, res, next) {
@@ -67,7 +67,7 @@ module.exports = function () {
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))
         }
-    });
+    }, true);
 
     //delete menu
     controller.addAction('DEL', '/menus/:id', function (req, res, next) {
@@ -83,7 +83,7 @@ module.exports = function () {
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))
         }
-    });
+    }, true);
 
     return controller;
 };

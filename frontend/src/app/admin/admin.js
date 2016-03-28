@@ -17,7 +17,9 @@ angular.module('app.admin', [
                     templateUrl: 'app/admin/admin.tpl.html'
                 }
             },
-            data: {pageTitle: 'admin'}
+            data: {
+                pageTitle: 'admin'
+            }
         });
     })
 

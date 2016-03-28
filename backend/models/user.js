@@ -1,12 +1,48 @@
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 
 // set up a mongoose model and pass it using module.exports
 var user = new Schema({
-    name: String,
-    password: String,
-    admin: Boolean
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
 });
 
-module.exports = mongoose.model('User', mongoose.model('User', user));
+user.pre('save', function (next) {
+    var user = this;
+    if (this.isModified('password') || this.isNew) {
+        bcrypt.genSalt(10, function (err, salt) {
+            if (err) {
+                return next(err);
+            }
+            bcrypt.hash(user.password, salt, function (err, hash) {
+                if (err) {
+                    return next(err);
+                }
+                user.password = hash;
+                next();
+            });
+        });
+    } else {
+        return next();
+    }
+});
+
+user.methods.comparePassword = function (passw, cb) {
+    bcrypt.compare(passw, this.password, function (err, isMatch) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
+    });
+};
+
+
+module.exports = mongoose.model('User', user);
