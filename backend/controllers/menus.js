@@ -38,14 +38,14 @@ module.exports = function () {
                     res.send(m);
                 })
         } else {
-            next(controller.RESTError('InvalidArgumentError', 'Invalid id'))
+            next(controller.RESTError('InvalidArgumentError', 'Invalid id'));
         }
     });
 
     //get menus
     controller.addAction('GET', '/menus', function (req, res, next) {
         Menu.find().exec(function (err, list) {
-            if (err) return next(controller.RESTError('InternalServerError', err))
+            if (err) return next(controller.RESTError('InternalServerError', err));
             res.send(list);
         });
     });

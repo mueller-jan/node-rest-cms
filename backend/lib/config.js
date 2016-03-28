@@ -7,5 +7,6 @@ module.exports = {
 	database: {
 		host: 'mongodb://localhost',
 		dbname: 'node-cms'
-	}
+	},
+	'secret': 'geheim'
 };
