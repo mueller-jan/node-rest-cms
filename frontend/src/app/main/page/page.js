@@ -4,18 +4,16 @@ angular.module('app.page', [
     ])
 
     .config(function config($stateProvider) {
-        if ($stateProvider.url != '/') {
-            $stateProvider.state('main.page', {
-                url: ':id',
-                views: {
-                    "page-content": {
-                        controller: 'PageCtrl',
-                        templateUrl: 'app/main/page/page.tpl.html'
-                    }
-                },
-                data: {pageTitle: 'asdf'}
-            });
-        }
+        $stateProvider.state('main.page', {
+            url: '^/page/:id',
+            views: {
+                "page-content": {
+                    controller: 'PageCtrl',
+                    templateUrl: 'app/main/page/page.tpl.html'
+                }
+            },
+            data: {pageTitle: 'asdf'}
+        });
     })
 
     .controller('PageCtrl',

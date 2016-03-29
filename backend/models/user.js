@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
 
-// set up a mongoose model and pass it using module.exports
 var user = new Schema({
     name: {
         type: String,
@@ -10,6 +9,10 @@ var user = new Schema({
         required: true
     },
     password: {
+        type: String,
+        required: true
+    },
+    role: {
         type: String,
         required: true
     }

@@ -4,11 +4,11 @@ angular.module('app.admin', [
         'admin.pages-list',
         'admin.menus-list',
         'admin.menus-edit',
-        'services.crud',
-        'ui.router'
+        'ui.router',
+        'app.config'
     ])
 
-    .config(function config($stateProvider) {
+    .config(function config($stateProvider, USER_ROLES) {
         $stateProvider.state('admin', {
             url: '/admin',
             views: {
@@ -18,7 +18,8 @@ angular.module('app.admin', [
                 }
             },
             data: {
-                pageTitle: 'admin'
+                pageTitle: 'admin',
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         });
     })

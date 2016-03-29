@@ -1,8 +1,5 @@
-angular.module('services.crud', [])
-    .factory('crudService', function ($http) {
-
-        var API_URL = 'http://localhost:3000';
-
+angular.module('services.crud', ['app.config'])
+    .factory('crudService', function ($http, API_URL) {
         return {
             getMenu: function (id) {
                 return $http.get(API_URL + '/menus/' + id);
@@ -29,7 +26,6 @@ angular.module('services.crud', [])
             },
 
             getPage: function (id) {
-                console.log("getpage" + id)
                 return $http.get(API_URL + '/pages/' + id);
             },
 
@@ -39,6 +35,6 @@ angular.module('services.crud', [])
 
             deletePage: function(id) {
                 return $http.delete(API_URL + '/pages/' + id);
-            },
+            }
         }
     });

@@ -15,15 +15,16 @@ server.use(restify.bodyParser());
 //Cross Origin Resource Sharing
 restify.CORS.ALLOW_HEADERS.push('authorization');
 restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
+restify.CORS.ALLOW_HEADERS.push('x-access-token');
 server.use(restify.CORS());
 
 server.get('/setup', function (req, res) {
     var mongoose    = require('mongoose');
     var User = require('./models/user');
     var nick = new User({
-        name: 'Nick Cerminara',
+        name: 'Nick',
         password: 'password',
-        admin: true
+        role: 'admin'
     });
 
 
@@ -35,7 +36,7 @@ server.get('/setup', function (req, res) {
         res.json({success: true});
     });
 });
-//setup protected routes (authentication required)
+//setup unprotected routes (no authentication required)
 lib.helpers.setupRoutes(server, lib, false);
 
 // route middleware to verify a token

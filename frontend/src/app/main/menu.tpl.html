@@ -7,5 +7,15 @@
          <md-button class="md-raised" ui-sref="admin">
              ADMIN-AREA
          </md-button>
+
+        <span ng-if="currentUser">
+             <md-button ng-click="logout()" class="md-raised">
+                 logout
+             </md-button>
+               Logged in as: {{currentUser.name}}
+        </span>
+
+
+
     </span>
 </md-toolbar>
