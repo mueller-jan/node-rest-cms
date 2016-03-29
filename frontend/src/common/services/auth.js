@@ -53,7 +53,7 @@ angular.module('services.auth', [])
             this.token = token;
             this.user = user;
         };
-        this.destroy = function ($window) {
+        this.destroy = function () {
             $window.localStorage.removeItem('token');
             this.token = null;
             this.user = null;
