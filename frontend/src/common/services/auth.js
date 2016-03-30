@@ -22,18 +22,37 @@ angular.module('services.auth', [])
             authService.isAuthenticated = function (success, error) {
                 return $http.post('http://localhost:3000/authenticate')
                     .success(function (user) {
-                    console.log("success")
-                    success(user);
-                }).error(error);
+                        console.log("success")
+                        success(user);
+                    }).error(error);
             };
 
+            //authService.loginWithToken = function () {
+            //    console.log("login with token")
+            //    var token = localStorage.getItem('token');
+            //    return $http
+            //        .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
+            //        .then(function (res) {
+            //            //$window.localStorage.setItem('token', token);
+            //            //userService.create(token, res.data.user);
+            //            return res.data.user;
+            //
+            //        })
+            //};
+
             authService.loginWithToken = function () {
+                console.log("login with token")
                 var token = localStorage.getItem('token');
                 return $http
                     .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
                     .then(function (res) {
+                        console.log(res.data.success)
                         //$window.localStorage.setItem('token', token);
                         //userService.create(token, res.data.user);
+                        if (res.data.success == false) {
+                            console.log("REJECT")
+                            return $q.reject({code: 'NOT_AUTHENTICATED'});
+                        }
                         return res.data.user;
 
                     })
