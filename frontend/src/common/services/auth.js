@@ -3,67 +3,62 @@ angular.module('services.auth', [])
         '$http',
         '$rootScope',
         '$window',
-        '$q',
-
-        function ($http, $rootScope, $window, $q) {
-            var authService = {};
+        'userService',
+        function ($http, $rootScope, $window, userService) {
             var that = this;
+            var authService = {};
             authService.login = function (credentials) {
                 return $http
                     .post('http://localhost:3000/login', credentials, {headers: {'Content-Type': 'application/json'}})
                     .then(function (res) {
-                        //userService.create(res.data.token, res.data.user);
                         $window.localStorage.setItem('token', res.data.token);
-                        console.log(res.data.token)
+                        console.log(res.data);
+                        console.log(userService)
+                        userService.create(res.data.user.name, res.data.user.role);
                         return res.data.user;
                     })
             };
-
-            authService.isAuthenticated = function (success, error) {
-                return $http.post('http://localhost:3000/authenticate')
-                    .success(function (user) {
-                        console.log("success")
-                        success(user);
-                    }).error(error);
-            };
-
-            //authService.loginWithToken = function () {
-            //    console.log("login with token")
-            //    var token = localStorage.getItem('token');
-            //    return $http
-            //        .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
-            //        .then(function (res) {
-            //            //$window.localStorage.setItem('token', token);
-            //            //userService.create(token, res.data.user);
-            //            return res.data.user;
-            //
-            //        })
-            //};
 
             authService.loginWithToken = function () {
                 console.log("login with token")
-                var token = localStorage.getItem('token');
+                var token = $window.localStorage.getItem('token');
                 return $http
                     .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
                     .then(function (res) {
-                        console.log(res.data.success)
-                        //$window.localStorage.setItem('token', token);
-                        //userService.create(token, res.data.user);
-                        if (res.data.success == false) {
-                            console.log("REJECT")
-                            return $q.reject({code: 'NOT_AUTHENTICATED'});
-                        }
+                        userService.create(res.data.user.name, res.data.user.role);
                         return res.data.user;
-
                     })
             };
 
+            //weak authentication mechanism for client side
+            //doesn't really matter since sensible data is protected on the server side
+            authService.isAuthenticated = function () {
+                return (userService.name && localStorage.getItem('token') !== null)
+            };
+
+            authService.isAuthorized = function () {
+                console.log(userService.role);
+                return (userService.name && (userService.role === 'admin'));
+            };
+
             authService.logout = function () {
+                userService.destroy();
                 $window.localStorage.removeItem('token');
             };
 
             return authService;
-        }]);
+        }])
+
+    .service('userService', function () {
+        this.create = function (name, role) {
+            this.name = name;
+            this.role = role;
+        };
+        this.destroy = function () {
+            this.name = null;
+            this.role = null;
+        };
+    });
 
 
 

@@ -5,8 +5,7 @@ angular.module('app.admin', [
         'admin.menus-list',
         'admin.menus-edit',
         'ui.router',
-        'app.config',
-        'services.auth'
+        'app.config'
     ])
 
     .config(function config($stateProvider) {
@@ -20,19 +19,13 @@ angular.module('app.admin', [
             },
             data: {
                 pageTitle: 'admin'
-            },
-            resolve: {
-                user: function ($q, authService) {
-                    return authService.loginWithToken();
-
-                }
             }
         })
     })
 
 
     .controller('AdminCtrl',
-        function AdminController($scope, $state, user) {
+        function AdminController($scope, $state) {
         });
 
 

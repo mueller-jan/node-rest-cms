@@ -12,12 +12,17 @@ angular.module('admin.pages-new', [
                     templateUrl: 'app/admin/pages/pages-edit.tpl.html'
                 }
             },
-            data: {pageTitle: 'pages.new'}
+            data: {pageTitle: 'pages.new'},
+            resolve: {
+                user: function ($q, authService) {
+                    return authService.loginWithToken();
+                }
+            }
         });
     })
 
     .controller('NewPagesCtrl',
-        function NewPagesController($scope, crudService) {
+        function NewPagesController($scope, crudService, user) {
             $scope.submit = function () {
                 crudService.createPage($scope.page);
             };
