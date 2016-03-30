@@ -25,10 +25,17 @@ module.exports = function () {
     }, true);
 
     controller.addAction('POST', '/authenticate', function (req, res, next) {
+        //var user = req.decoded._doc;
+        console.log("HI")
+
+        res.json({user: {name: user.name, role: user.role}});
+        next();
+    }, false);
+
+    controller.addAction('POST', '/login', function (req, res, next) {
         var body = req.body;
         console.log(body);
         var username = body.username;
-        var token = body.token;
 
         if (username) {
             //find the user

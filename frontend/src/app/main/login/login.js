@@ -26,7 +26,7 @@ angular.module('app.login', [
             $scope.login = function (credentials) {
                 authService.login(credentials).then(function (user) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    $scope.setCurrentUser(user);
+                    //$scope.setCurrentUser(user);
                 }, function () {
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });
