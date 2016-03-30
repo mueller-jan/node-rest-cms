@@ -86,7 +86,10 @@ module.exports = function () {
                     p.remove(function (err, p) {
                         if (err) return next(controller.RESTError('InternalServerError', err));
                     });
-                    res.send(p);
+                    Page.find().exec(function (err, list) {
+                        if (err) return next(controller.RESTError('InternalServerError', err));
+                        res.send(list);
+                    });
                 })
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))

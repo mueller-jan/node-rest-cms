@@ -1,4 +1,4 @@
-<md-toolbar layout="row" layout-align="start center">
+<md-toolbar layout="row" layout-align="start end">
     <span> <h2 class="md-toolbar-tools"> Node Rest CMS </h2></span>
     <span>
         <md-button md-ripple-size="full" ng-repeat="item in menuItems" ui-sref="main.page({id: item.slug})"
@@ -14,8 +14,5 @@
              </md-button>
                Logged in as: {{currentUser.name}}
         </span>
-
-
-
     </span>
 </md-toolbar>

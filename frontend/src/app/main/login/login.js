@@ -12,7 +12,7 @@ angular.module('app.login', [
                     templateUrl: 'app/main/login/login.tpl.html'
                 }
             },
-            data: {pageTitle: 'asdf'}
+            data: {pageTitle: 'login'}
         });
     })
 

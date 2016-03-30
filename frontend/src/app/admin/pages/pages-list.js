@@ -23,7 +23,9 @@ angular.module('admin.pages-list', [
             });
 
             $scope.deletePage = function(id) {
-                crudService.deletePage(id);
+                crudService.deletePage(id).then(function (res) {
+                    $scope.pages = res.data;
+                });
             }
         });
 

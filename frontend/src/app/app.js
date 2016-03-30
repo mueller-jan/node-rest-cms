@@ -12,6 +12,23 @@ var app = angular.module('app', [
         $urlRouterProvider.otherwise('/');
     })
 
+    .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push(['$location', '$injector', '$q', function ($location, $injector, $q) {
+            return {
+                request: function (req) {
+                    //injected manually to get around circular dependency problem.
+                    var authService = $injector.get('authService');
+
+                    var token = authService.getToken();
+                    if (token) {
+                        req.headers['x-access-token'] = token;
+                    }
+                    return req;
+                }
+            }
+        }])
+    }])
+
 
     .run(function ($state, authService) {
 
@@ -44,15 +61,12 @@ var app = angular.module('app', [
 
         $scope.logout = function () {
             authService.logout();
+            $scope.currentUser = null;
             $state.go('main');
         };
 
         $scope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-            console.log(authService)
             if (toState.name.indexOf('admin') > -1) {
-                console.log("needs prot")
-                console.log(!authService.isAuthenticated())
-                console.log(!authService.isAuthorized())
                 if (!authService.isAuthenticated() || !authService.isAuthorized()) {
                     $state.transitionTo("main.login");
                     event.preventDefault();

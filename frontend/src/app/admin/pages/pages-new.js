@@ -5,24 +5,19 @@ angular.module('admin.pages-new', [
 
     .config(function config($stateProvider) {
         $stateProvider.state('admin.pages-new', {
-            url: '/pages/new/:id',
+            url: '/pages/new',
             views: {
                 "content": {
                     controller: 'NewPagesCtrl',
                     templateUrl: 'app/admin/pages/pages-edit.tpl.html'
                 }
             },
-            data: {pageTitle: 'pages.new'},
-            resolve: {
-                user: function ($q, authService) {
-                    return authService.loginWithToken();
-                }
-            }
+            data: {pageTitle: 'new page'}
         });
     })
 
     .controller('NewPagesCtrl',
-        function NewPagesController($scope, crudService, user) {
+        function NewPagesController($scope, crudService) {
             $scope.submit = function () {
                 crudService.createPage($scope.page);
             };
