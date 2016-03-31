@@ -35,7 +35,7 @@ var app = angular.module('app', [
         }])
     }])
 
-    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService) {
+    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, crudService) {
         $scope.currentUser = null;
 
         authService.loginWithToken().then(function (data) {
@@ -68,5 +68,8 @@ var app = angular.module('app', [
                 $scope.pageTitle = toState.data.pageTitle;
             }
         });
+
+        //var user = {name: 'admin', password: 'admin', role: 'admin'};
+        //crudService.createUser(user);
     });
 

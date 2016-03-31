@@ -5,6 +5,10 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/menus/' + id);
             },
 
+            createMenu: function(menu) {
+                return $http.post(API_URL + '/menus', menu, {headers: {'Content-Type': 'application/json'}});
+            },
+
             getMenus: function() {
                 return $http.get(API_URL + '/menus');
             },

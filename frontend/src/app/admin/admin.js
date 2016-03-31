@@ -4,6 +4,7 @@ angular.module('app.admin', [
         'admin.pages-list',
         'admin.menus-list',
         'admin.menus-edit',
+        'admin.menus-new',
         'admin.users-list',
         'admin.users-new',
         'ui.router'

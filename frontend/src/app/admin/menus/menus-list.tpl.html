@@ -2,4 +2,4 @@
     <li ng-repeat="menu in menus">{{menu.name}} <a ui-sref="admin.menus-edit({id: menu._id})">edit</a> <button ng-click="deleteMenu(menu._id)">delete</button> </li>
 </ul>
 
-
+<md-button ui-sref="admin.menus-new" class="md-raised md-primary" >new Menu</md-button>
