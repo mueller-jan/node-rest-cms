@@ -18,24 +18,6 @@ restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
 restify.CORS.ALLOW_HEADERS.push('x-access-token');
 server.use(restify.CORS());
 
-server.get('/setup', function (req, res) {
-    var mongoose    = require('mongoose');
-    var User = require('./models/user');
-    var nick = new User({
-        name: 'Nick',
-        password: 'password',
-        role: 'admin'
-    });
-
-
-     //save the sample user
-    nick.save(function (err) {
-        if (err) throw err;
-
-        console.log('User saved successfully');
-        res.json({success: true});
-    });
-});
 //setup unprotected routes (no authentication required)
 lib.helpers.setupRoutes(server, lib, false);
 

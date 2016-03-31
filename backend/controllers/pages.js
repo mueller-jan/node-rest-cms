@@ -16,7 +16,7 @@ module.exports = function () {
             if (err) return next(controller.RESTError('InternalServerError', err));
             res.send(list);
         });
-    });
+    }, true);
 
     //get page by id or slug
     controller.addAction('GET', '/pages/:id', function (req, res, next) {
@@ -46,7 +46,6 @@ module.exports = function () {
         var body = req.body;
         if (body) {
             var page = new Page(body);
-            console.log(page);
             page.date = new Date();
             page.save(function (err, p) {
                 if (err) return next(controller.RESTError('InternalServerError', err));
@@ -85,10 +84,7 @@ module.exports = function () {
                     if (err) return next(controller.RESTError('InternalServerError', err));
                     p.remove(function (err, p) {
                         if (err) return next(controller.RESTError('InternalServerError', err));
-                    });
-                    Page.find().exec(function (err, list) {
-                        if (err) return next(controller.RESTError('InternalServerError', err));
-                        res.send(list);
+                        res.send(p);
                     });
                 })
         } else {

@@ -27,13 +27,10 @@ function validateToken(req, res, next) {
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
-                console.log(decoded)
                 next();
             }
         });
     } else {
-        // if there is no token
-        // return an error
         return res.send(403, {
             success: false,
             message: 'No token provided.'

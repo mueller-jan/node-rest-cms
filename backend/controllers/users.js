@@ -14,27 +14,33 @@ module.exports = function () {
 
     controller.addAction('GET', '/users', function (req, res) {
         User.find({}, function (err, users) {
-            res.json(users);
+            res.send(users);
         });
     }, true);
 
+    //get user from token
     controller.addAction('POST', '/token', function (req, res, next) {
         var user = req.decoded._doc;
-        res.json({user: {name: user.name, role: user.role}});
+        res.send({user: {name: user.name, role: user.role}});
         next();
     }, true);
 
-    controller.addAction('POST', '/authenticate', function (req, res, next) {
-        //var user = req.decoded._doc;
-        console.log("HI")
-
-        res.json({user: {name: user.name, role: user.role}});
-        next();
+    //create user
+    controller.addAction('POST', '/users', function (req, res, next) {
+        var body = req.body;
+        if (body) {
+            var user = new User(body);
+            user.save(function (err, u) {
+                if (err) return next(controller.RESTError('InternalServerError', err));
+                res.send(u);
+            })
+        } else {
+            next(controller.RESTError('InvalidArgumentError', 'No data received'))
+        }
     }, false);
 
     controller.addAction('POST', '/login', function (req, res, next) {
         var body = req.body;
-        console.log(body);
         var username = body.username;
 
         if (username) {

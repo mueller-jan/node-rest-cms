@@ -35,6 +35,14 @@ angular.module('services.crud', ['app.config'])
 
             deletePage: function(id) {
                 return $http.delete(API_URL + '/pages/' + id);
+            },
+
+            createUser: function (user) {
+                return $http.post(API_URL + '/users', user, {headers: {'Content-Type': 'application/json'}});
+            },
+
+            getUsers: function () {
+                return $http.get(API_URL + '/users');
             }
         }
     });

@@ -5,8 +5,11 @@
                    aria-label="{{item.title}}"> {{item.title}}
         </md-button>
          <md-button class="md-raised" ui-sref="admin">
-             ADMIN-AREA
+             <!--<md-icon md-font-icon="build" ui-sref="admin"/>-->
+             Admin
          </md-button>
+
+
 
         <span ng-if="currentUser">
              <md-button ng-click="logout()" class="md-raised">

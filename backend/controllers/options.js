@@ -8,8 +8,5 @@ Options.prototype = new BaseController();
 
 module.exports = function () {
     var controller = new Options();
-
-
-
     return controller;
 };
