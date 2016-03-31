@@ -1,17 +1,11 @@
 <h2>Pages</h2>
+<table>
+    <tr ng-repeat="page in pages">
+        <td>{{ page.title }}</td>
+        <td><md-button class="md-raised" ui-sref="admin.pages-edit({id: page.slug})">edit</md-button></td>
+        <td><md-button class="md-raised" ng-click="deletePage(page._id)">delete</md-button></td>
+    </tr>
+</table>
 
-<md-list>
-    <md-list-item ng-repeat="page in pages">
-        {{page.title}}
-        <md-button class="md-raised md-primary" ui-sref="admin.pages-edit({id: page.slug})">
-            edit
-        </md-button>
-        <md-button class="md-raised md-secondary" ng-click="deletePage(page._id)">
-            delete
-        </md-button>
-    </md-list-item>
-</md-list>
-
-
-<md-button ui-sref="admin.pages-new" class="md-raised md-primary" >new Page</md-button>
+<md-button ui-sref="admin.pages-new" class="md-raised md-primary">new Page</md-button>
 
