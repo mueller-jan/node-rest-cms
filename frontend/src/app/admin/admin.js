@@ -6,8 +6,7 @@ angular.module('app.admin', [
         'admin.menus-edit',
         'admin.users-list',
         'admin.users-new',
-        'ui.router',
-        'app.config'
+        'ui.router'
     ])
 
     .config(function config($stateProvider) {
@@ -24,7 +23,6 @@ angular.module('app.admin', [
             }
         })
     })
-
 
     .controller('AdminCtrl',
         function AdminController($scope, $state) {

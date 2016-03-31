@@ -7,13 +7,19 @@ var app = angular.module('app', [
         'ngMaterial'
     ])
 
+    .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('blue')
+            .accentPalette('orange');
+    })
+
 
     .config(function appConfig($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
     })
 
     .config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.interceptors.push(['$location', '$injector', '$q', function ($location, $injector, $q) {
+        $httpProvider.interceptors.push(['$location', '$injector', '$q', function ($location, $injector, $q) {
             return {
                 request: function (req) {
                     //injected manually to get around circular dependency problem.
@@ -29,29 +35,12 @@ var app = angular.module('app', [
         }])
     }])
 
-
-    .run(function ($state, authService) {
-
-    })
-
     .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService) {
-        console.log("CONTROLLER")
-        //var token = $window.localStorage.getItem('token');
-        //authService.loginWithToken(token).then(function(data) {
-        //    $scope.currentUser = data
-        // });
-        //
-        //$scope.logout = function () {
-        //    authService.logout();
-        //    $scope.currentUser = null;
-        //    $state.go('main');
-        //};
-        //
-        //$scope.userRoles = USER_ROLES;
-        ////$scope.isAuthorized = authService.isAuthorized;
-        //
-
         $scope.currentUser = null;
+
+        authService.loginWithToken().then(function (data) {
+            $scope.currentUser = data
+        });
 
         $scope.isAuthorized = authService.isAuthorized;
 

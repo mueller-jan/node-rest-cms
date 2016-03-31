@@ -1,7 +1,17 @@
-<ul>
-    <li ng-repeat="page in pages">{{page.slug}} <a ui-sref="admin.pages-edit({id: page.slug})">edit</a> <button ng-click="deletePage(page._id)">delete</button> </li>
-</ul></li>
-</ul>
+<h2>Pages</h2>
 
-<a ui-sref="admin.pages-new">new Page</a>
+<md-list>
+    <md-list-item ng-repeat="page in pages">
+        {{page.title}}
+        <md-button class="md-raised md-primary" ui-sref="admin.pages-edit({id: page.slug})">
+            edit
+        </md-button>
+        <md-button class="md-raised md-secondary" ng-click="deletePage(page._id)">
+            delete
+        </md-button>
+    </md-list-item>
+</md-list>
+
+
+<md-button ui-sref="admin.pages-new" class="md-raised md-primary" >new Page</md-button>
 

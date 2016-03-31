@@ -18,6 +18,8 @@ angular.module('services.auth', [])
             };
 
             authService.loginWithToken = function () {
+                var token = tokenService.load();
+                console.log(token)
                 return $http
                     .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
                     .then(function (res) {
