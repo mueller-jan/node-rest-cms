@@ -9,7 +9,7 @@ angular.module('app.login', [
             views: {
                 "page-content": {
                     controller: 'LoginCtrl',
-                    templateUrl: 'app/main/login/login.tpl.html'
+                    templateUrl: 'app/public/login/login.tpl.html'
                 }
             },
             data: {pageTitle: 'login'}

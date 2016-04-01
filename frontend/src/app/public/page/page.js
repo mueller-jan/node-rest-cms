@@ -9,7 +9,7 @@ angular.module('app.page', [
             views: {
                 "page-content": {
                     controller: 'PageCtrl',
-                    templateUrl: 'app/main/page/page.tpl.html'
+                    templateUrl: 'app/public/page/page.tpl.html'
                 }
             },
             data: {pageTitle: 'asdf'}
@@ -17,8 +17,12 @@ angular.module('app.page', [
     })
 
     .controller('PageCtrl',
-        function PageController($scope, $stateParams, crudService) {
+        function PageController($scope, $stateParams, $sce, crudService) {
             crudService.getPage($stateParams.id).then(function (res) {
                 $scope.page = res.data;
+                $scope.page.content = $sce.trustAsHtml($scope.page.content);
+                //$scope.toTrustedHTML = function(html){
+                //    return $sce.trustAsHtml(html);
+                //}
             });
         });

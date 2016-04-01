@@ -47,6 +47,15 @@ angular.module('services.crud', ['app.config'])
 
             getUsers: function () {
                 return $http.get(API_URL + '/users');
+            },
+
+            uploadFile: function(file) {
+                var fd = new FormData();
+                fd.append('file', file);
+                $http.post(API_URL + '/upload', fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
             }
         }
     });

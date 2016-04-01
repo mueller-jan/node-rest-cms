@@ -1,8 +1,11 @@
 <form name="myForm" ng-submit="submit()">
     Page-Title: <input ng-model="page.title"/>
     <br/>
-    Page-Content: <textarea ng-model="page.content"></textarea>
+    Page-Content: <div text-angular ng-model="page.content"></div>
     <br/>
     Slug:  <input ng-model="page.slug"/>
     <input type="submit" id="submit" value="Submit" />
+
+    <input type="file" file-model="myFile"/>
+    <button ng-click="upload()">upload me</button>
 </form>

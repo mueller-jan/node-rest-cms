@@ -1,5 +1,7 @@
 angular.module('admin.pages-edit', [
         'services.crud',
+        'textAngular',
+        'file-model',
         'ui.router'
     ])
 
@@ -27,8 +29,11 @@ angular.module('admin.pages-edit', [
             $scope.submit = function () {
                 crudService.updatePage($scope.page._id, $scope.page);
             };
+
+
+            $scope.upload = function () {
+                var file = $scope.myFile;
+                crudService.uploadFile(file);
+            };
         });
-
-
-
 
