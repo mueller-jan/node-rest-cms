@@ -12,7 +12,7 @@ angular.module('app.page', [
                     templateUrl: 'app/public/page/page.tpl.html'
                 }
             },
-            data: {pageTitle: 'asdf'}
+            data: {pageTitle: 'page'}
         });
     })
 
@@ -21,8 +21,5 @@ angular.module('app.page', [
             crudService.getPage($stateParams.id).then(function (res) {
                 $scope.page = res.data;
                 $scope.page.content = $sce.trustAsHtml($scope.page.content);
-                //$scope.toTrustedHTML = function(html){
-                //    return $sce.trustAsHtml(html);
-                //}
             });
         });

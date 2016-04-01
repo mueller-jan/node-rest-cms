@@ -25,7 +25,8 @@ angular.module('app.main', [
                 $scope.menuItems = res.data.items;
                 if ($scope.menuItems.length > 0) {
                     //TODO: startpage festlegen
-                    //$state.go('/page/' + $scope.menuItems[0].slug);
+
+                    $state.go('main.page', {id: $scope.menuItems[0].slug});
                 }
             });
         });

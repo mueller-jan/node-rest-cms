@@ -22,7 +22,7 @@ var app = angular.module('app', [
         $httpProvider.interceptors.push(['$location', '$injector', '$q', function ($location, $injector, $q) {
             return {
                 request: function (req) {
-                    //injected manually to get around circular dependency problem.
+                    //injected manually to get around circular dependency problem ($http).
                     var authService = $injector.get('authService');
 
                     var token = authService.getToken();
@@ -74,8 +74,5 @@ var app = angular.module('app', [
                 $scope.pageTitle = toState.data.pageTitle;
             }
         });
-
-        //var user = {name: 'admin', password: 'admin', role: 'admin'};
-        //crudService.createUser(user);
     });
 
