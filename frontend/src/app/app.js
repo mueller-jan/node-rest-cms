@@ -10,7 +10,10 @@ var app = angular.module('app', [
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
-            .accentPalette('orange');
+            .primaryPalette('indigo')
+            .accentPalette('orange')
+            .warnPalette('red')
+
     })
 
 

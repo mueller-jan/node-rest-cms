@@ -29,7 +29,7 @@ module.exports = function () {
         var id = req.params.id;
         if (id) {
             Menu.findOne({_id: id})
-                .populate('items')
+                .populate('items', 'slug title')
                 .exec(function (err, m) {
                     if (err) return next(err);
                     if (!m) {

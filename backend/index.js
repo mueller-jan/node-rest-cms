@@ -2,7 +2,6 @@ var restify = require("restify");
 var lib = require("./lib");
 var config = lib.config;
 var colors = require("colors");
-fs = require("fs");
 
 var server = restify.createServer(lib.config.server);
 
@@ -11,12 +10,60 @@ server.use(restify.queryParser());
 
 //access the content of the POST and PUT requests as
 //an object, with the added bonus of autoparsing JSON strings.
-server.use(restify.bodyParser({ keepExtensions: true, uploadDir: "uploads" }));
+server.use(restify.bodyParser({keepExtensions: true, uploadDir: "uploads"}));
 
 //Cross Origin Resource Sharing
 restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
 restify.CORS.ALLOW_HEADERS.push('x-access-token');
 server.use(restify.CORS());
+
+var mongoose = require('mongoose');
+var Page = require('./models/page');
+var Layout = require('./models/layout');
+var Menu = require('./models/menu');
+
+var layoutElements = [];
+
+//Layout.count({}, function (err, result) {
+//    if (err) throw err;
+//    if (result === 0) {
+//        var page = new Page({
+//            slug: 'start',
+//            date: new Date(),
+//            title: 'Start'
+//        });
+//
+//        var menu = new Menu({
+//            name: 'Default',
+//            items: page
+//        });
+//
+//        layoutElements.push(new Layout({
+//            name: 'toolbar',
+//            content: 'NODE CMS',
+//            items: menu
+//        }));
+        //
+        //layoutElements.push(new Layout({
+        //    name: 'toolbar',
+        //    content: 'NODE CMS'
+        //}));
+        //
+        //layoutElements.push(new Layout({
+        //    name: 'sidebar-left'
+        //}));
+        //
+        //layoutElements.push(new Layout({
+        //    name: 'footer'
+        //}));
+        //
+        //for (var i = 0; i < layoutElements.length; i++)
+        //    layoutElements[i].save(function (err, l) {
+        //        if (err) throw err;
+        //    });
+//    }
+//});
+
 
 //setup unprotected routes (no authentication required)
 lib.helpers.setupRoutes(server, lib, false);
@@ -26,7 +73,7 @@ server.use(function (req, res, next) {
     lib.helpers.validateToken(req, res, next);
 });
 
-server.post('/upload', function(req, res, next) {
+server.post('/upload', function (req, res, next) {
     res.send("upload complete");
 });
 

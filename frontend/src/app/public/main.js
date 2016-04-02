@@ -22,6 +22,7 @@ angular.module('app.main', [
         function MainController($scope, $state, crudService) {
             console.log($scope.currentUser)
             crudService.getMenu("56f67a391769df1419c7677d").then(function (res) {
+                console.log(res)
                 $scope.menuItems = res.data.items;
                 if ($scope.menuItems.length > 0) {
                     //TODO: startpage festlegen
