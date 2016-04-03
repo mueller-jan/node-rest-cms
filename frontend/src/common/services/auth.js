@@ -23,7 +23,10 @@ angular.module('services.auth', [])
                 return $http
                     .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
                     .then(function (res) {
-                        userService.create(res.data.user.name, res.data.user.role);
+                        console.log(res)
+                        if (res.data.success !== false) {
+                            userService.create(res.data.user.name, res.data.user.role);
+                        }
                         return res.data.user;
                     })
             };
@@ -73,7 +76,24 @@ angular.module('services.auth', [])
                 return localStorage.removeItem(storageKey);
             }
         }
-    });
+    })
+.factory ('authInterceptor',  [
+    '$injector',
+    '$q',
+    function ($injector, $q) {
+    return {
+        request: function (req) {
+            //injected manually to get around circular dependency problem ($http).
+            var authService = $injector.get('authService');
+
+            var token = authService.getToken();
+            if (token) {
+                req.headers['x-access-token'] = token;
+            }
+            return req;
+        }
+    }
+}]);
 
 
 

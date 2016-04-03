@@ -49,6 +49,10 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/users');
             },
 
+            getLayout: function() {
+                return $http.get(API_URL + '/layout')
+            },
+
             uploadFile: function(file) {
                 var fd = new FormData();
                 fd.append('file', file);
@@ -57,5 +61,7 @@ angular.module('services.crud', ['app.config'])
                     headers: {'Content-Type': undefined}
                 })
             }
+
+
         }
     });

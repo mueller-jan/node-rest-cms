@@ -12,6 +12,7 @@
     "jsonwebtoken": "^5.7.0",
     "latest-version": "^2.0.0",
     "mongoose": "^3.8.12",
+    "mongoose-deep-populate": "^3.0.0",
     "mongoose-json-select": "^0.2.1",
     "restify": "^2.8.5",
     "tv4": "^1.1.9",

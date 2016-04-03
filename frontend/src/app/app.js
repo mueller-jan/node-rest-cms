@@ -13,7 +13,6 @@ var app = angular.module('app', [
             .primaryPalette('indigo')
             .accentPalette('orange')
             .warnPalette('red')
-
     })
 
 
@@ -21,21 +20,8 @@ var app = angular.module('app', [
         $urlRouterProvider.otherwise('/');
     })
 
-    .config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.interceptors.push(['$location', '$injector', '$q', function ($location, $injector, $q) {
-            return {
-                request: function (req) {
-                    //injected manually to get around circular dependency problem ($http).
-                    var authService = $injector.get('authService');
-
-                    var token = authService.getToken();
-                    if (token) {
-                        req.headers['x-access-token'] = token;
-                    }
-                    return req;
-                }
-            }
-        }])
+    .config(['$httpProvider', function ($httpProvider, authService) {
+        $httpProvider.interceptors.push('authInterceptor');
     }])
 
     .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, crudService) {
