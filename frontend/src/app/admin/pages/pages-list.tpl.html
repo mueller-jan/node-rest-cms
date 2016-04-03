@@ -1,31 +1,31 @@
 <md-card>
-    <md-content>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Pages</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <table>
-                <tr ng-repeat="page in pages">
-                    <td>{{ page.title }}</td>
-                    <td>
-                        <md-button ui-sref="admin.pages-edit({id: page.slug})" class="md-icon-button md-accent">
-                            <md-icon>build</md-icon>
-                        </md-button>
-                    </td>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Pages</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <table>
+            <tr ng-repeat="page in pages">
+                <td>{{ page.title }}</td>
+                <td>
+                    <md-button ui-sref="admin.pages-edit({id: page.slug})" class="md-icon-button md-accent">
+                        <md-icon>build</md-icon>
+                    </md-button>
+                </td>
 
-                    <td>
-                        <md-button ng-click="deletePage(page._id)" class="md-icon-button md-accent">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                    </td>
-                </tr>
-            </table>
+                <td>
+                    <md-button ng-click="deletePage(page._id)" class="md-icon-button md-accent">
+                        <md-icon>delete</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </table>
 
-            <md-button ui-sref="admin.pages-new" class="md-raised md-primary"><md-icon>add</md-icon></md-button>
-        </md-card-content>
-    </md-content>
+        <md-button ui-sref="admin.pages-new" class="md-fab md-mini">
+            <md-icon>add</md-icon>
+        </md-button>
+    </md-card-content>
 </md-card>
 
 

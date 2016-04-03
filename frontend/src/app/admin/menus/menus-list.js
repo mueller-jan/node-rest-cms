@@ -22,8 +22,12 @@ angular.module('admin.menus-list', [
                 $scope.menus = res.data;
             });
 
-            $scope.deleteMenu = function(id) {
-                crudService.deleteMenu(id);
+            $scope.deletePage = function(id) {
+                crudService.deletePage(id).then(function () {
+                    crudService.getMenus().then(function (res) {
+                        $scope.menus = res.data;
+                    });
+                });
             }
         });
 
