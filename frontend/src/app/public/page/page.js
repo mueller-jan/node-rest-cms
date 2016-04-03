@@ -12,14 +12,17 @@ angular.module('app.page', [
                     templateUrl: 'app/public/page/page.tpl.html'
                 }
             },
-            data: {pageTitle: 'page'}
+            data: {pageTitle: 'page'},
+            resolve: {
+                page: function (crudService, $stateParams) {
+                    return crudService.getPage($stateParams.id)
+                }
+            }
         });
     })
 
     .controller('PageCtrl',
-        function PageController($scope, $stateParams, $sce, crudService) {
-            crudService.getPage($stateParams.id).then(function (res) {
-                $scope.page = res.data;
+        function PageController($scope, $stateParams, $sce, page) {
+                $scope.page = page.data;
                 $scope.page.content = $sce.trustAsHtml($scope.page.content);
-            });
         });

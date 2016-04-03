@@ -44,9 +44,7 @@ var app = angular.module('app', [
         };
 
         $scope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-            if (toState.resolve) {
-                $scope.showProgress = true;
-            }
+            $scope.loading = true;
             if (toState.name.indexOf('admin') > -1) {
                 if (!authService.isAuthenticated() || !authService.isAuthorized()) {
                     $state.transitionTo("main.login");
@@ -56,9 +54,7 @@ var app = angular.module('app', [
         });
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-            if (toState.resolve) {
-                $scope.showProgress = false;
-            }
+            $scope.loading = false;
             if (angular.isDefined(toState.data.pageTitle)) {
                 $scope.pageTitle = toState.data.pageTitle;
             }
