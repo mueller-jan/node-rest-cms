@@ -17,7 +17,6 @@ restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
 restify.CORS.ALLOW_HEADERS.push('x-access-token');
 server.use(restify.CORS());
 
-
 lib.db.setup();
 
 //setup unprotected routes (no authentication required)
