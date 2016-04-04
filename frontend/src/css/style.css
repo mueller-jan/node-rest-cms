@@ -3,3 +3,7 @@
     min-height: 100%;
     height: auto;
 }
+
+#popupContainer {
+    height: 0px;
+}

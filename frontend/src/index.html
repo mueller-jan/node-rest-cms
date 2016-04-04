@@ -21,6 +21,13 @@
 
     <title>Homepage</title>
 </head>
+<div id="popupContainer">
+    <md-dialog aria-label="List dialog">
+        <md-dialog-actions>
+            <md-button ng-click="closeDialog()" class="md-primary">Close Dialog</md-button>
+        </md-dialog-actions>
+    </md-dialog>
+</div>
 
 <body class="bg">
     <!--<md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>-->
@@ -56,6 +63,7 @@
 <script src="app/admin/menus/menus-list.js"></script>
 <script src="app/admin/menus/menus-edit.js"></script>
 <script src="app/admin/media/media.js"></script>
+<script src="common/services/error.js"></script>
 <script src="common/services/crud.js"></script>
 <script src="common/services/auth.js"></script>
 <script src="common/directives/file-model.js"></script>

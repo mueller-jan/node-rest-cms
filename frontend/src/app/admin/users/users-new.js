@@ -19,7 +19,6 @@ angular.module('admin.users-new', [
     .controller('NewUserCtrl',
         function NewUserController($scope, crudService) {
             $scope.submit = function () {
-                console.log($scope.user);
                 crudService.createUser($scope.user);
             };
         });

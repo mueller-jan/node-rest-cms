@@ -19,8 +19,13 @@ angular.module('admin.pages-new', [
     .controller('NewPagesCtrl',
         function NewPagesController($scope, crudService) {
             $scope.submit = function () {
-                crudService.createPage($scope.page);
+                crudService.createPage($scope.page).then(onSuccess, onError);
             };
+
+            function onSuccess(data) {
+            }
+            function onError(data) {
+            }
         });
 
 

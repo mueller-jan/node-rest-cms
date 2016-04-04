@@ -4,6 +4,7 @@ var app = angular.module('app', [
         'ui.router',
         'services.crud',
         'services.auth',
+        'services.error',
         'ngMaterial'
     ])
 
@@ -12,7 +13,7 @@ var app = angular.module('app', [
             .primaryPalette('blue')
             .primaryPalette('indigo')
             .accentPalette('orange')
-            .warnPalette('red')
+            .warnPalette('red');
     })
 
 
@@ -20,16 +21,29 @@ var app = angular.module('app', [
         $urlRouterProvider.otherwise('/');
     })
 
-    .config(['$httpProvider', function ($httpProvider, authService) {
+    .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('authInterceptor');
+        $httpProvider.interceptors.push('errorInterceptor');
     }])
 
-    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, crudService) {
+    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, $mdDialog) {
+        $rootScope.$on("error", function(e, error) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .title('Error')
+                    .textContent(error.data.message)
+                    .ariaLabel('Alert Dialog')
+                    .ok('OK')
+            );
+        });
+
         $scope.currentUser = null;
 
-        authService.loginWithToken().then(function (data) {
-            $scope.currentUser = data
-        });
+        //authService.loginWithToken().then(function (data) {
+        //    $scope.currentUser = data
+        //});
 
         $scope.isAuthorized = authService.isAuthorized;
 

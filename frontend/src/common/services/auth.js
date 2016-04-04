@@ -1,15 +1,17 @@
-angular.module('services.auth', [])
+angular.module('services.auth', ['app.config'])
     .factory('authService', [
         '$http',
         '$rootScope',
         '$window',
         'userService',
         'tokenService',
-        function ($http, $rootScope, $window, userService, tokenService) {
+        'API_URL',
+        function ($http, $rootScope, $window, userService, tokenService, API_URL) {
             var authService = {};
+
             authService.login = function (credentials) {
                 return $http
-                    .post('http://localhost:3000/login', credentials, {headers: {'Content-Type': 'application/json'}})
+                    .post(API_URL + '/login', credentials, {headers: {'Content-Type': 'application/json'}})
                     .then(function (res) {
                         tokenService.save(res.data.token);
                         userService.create(res.data.user.name, res.data.user.role);
@@ -19,9 +21,8 @@ angular.module('services.auth', [])
 
             authService.loginWithToken = function () {
                 var token = tokenService.load();
-                console.log(token)
                 return $http
-                    .post('http://localhost:3000/token', null, {headers: {'x-access-token': token}})
+                    .post(API_URL + '/token', null, {headers: {'x-access-token': token}})
                     .then(function (res) {
                         console.log(res)
                         if (res.data.success !== false) {
@@ -80,7 +81,9 @@ angular.module('services.auth', [])
 .factory ('authInterceptor',  [
     '$injector',
     '$q',
-    function ($injector, $q) {
+    '$rootScope',
+    'ERROR_EVENTS',
+    function ($injector) {
     return {
         request: function (req) {
             //injected manually to get around circular dependency problem ($http).

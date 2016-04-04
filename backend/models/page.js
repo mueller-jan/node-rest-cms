@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var uniqueValidator = require('mongoose-unique-validator');
 
 var page = new Schema({
     slug: {type: String, index: true, unique: true, required: true},
@@ -10,6 +11,8 @@ var page = new Schema({
     type: String,
     category: String
 });
+
+page.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Page', page);
 

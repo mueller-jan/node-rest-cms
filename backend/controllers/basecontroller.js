@@ -41,11 +41,13 @@ BaseController.prototype.addAction = function(method, path, func, protect) {
 //This is a simple wrapper method around all the error methods provided
 //by Restify. It provides the benefit of cleaner code.
 BaseController.prototype.RESTError = function(type, msg) {
+
     if(restify[type]) {
         return new restify[type](msg.toString());
     } else {
         console.log("Type " + type + " of error not found".red);
     }
+    res.send(msg);
 };
 
 module.exports = BaseController;
