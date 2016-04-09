@@ -14,6 +14,7 @@
     "mongoose": "^3.8.12",
     "mongoose-deep-populate": "^3.0.0",
     "mongoose-json-select": "^0.2.1",
+    "mongoose-unique-validator": "^1.0.2",
     "restify": "^2.8.5",
     "tv4": "^1.1.9",
     "tv4-formats": "^1.0.0",
