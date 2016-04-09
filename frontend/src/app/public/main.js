@@ -1,5 +1,6 @@
 angular.module('app.main', [
         'app.page',
+        'app.category',
         'app.login',
         'services.crud',
         'ui.router'
@@ -22,9 +23,11 @@ angular.module('app.main', [
         function MainController($scope, $state, $filter, crudService) {
             crudService.getLayout().then(function(res) {
                $scope.layout = res.data;
+                console.log($scope.layout)
                 var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
-                $scope.menuItems = toolbar.items[0].items;
-                $state.go('main.page', {id: $scope.menuItems[0].slug});
+                $scope.menu = toolbar.items[0].items;
+                console.log($scope.menu)
+                //$state.go('main.page', {id: $scope.menu.path});
             });
         });
 

@@ -1,0 +1,32 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Posts</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <table>
+            <tr ng-repeat="post in posts">
+                <td>{{ post.title }}</td>
+                <td>
+                    <md-button ui-sref="admin.posts-edit({id: post.slug})" class="md-icon-button md-accent">
+                        <md-icon>build</md-icon>
+                    </md-button>
+                </td>
+
+                <td>
+                    <md-button ng-click="deletePage(page._id)" class="md-icon-button md-accent">
+                        <md-icon>delete</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </table>
+
+        <md-button ui-sref="admin.pages-new" class="md-fab md-mini">
+            <md-icon>add</md-icon>
+        </md-button>
+    </md-card-content>
+</md-card>
+
+
+

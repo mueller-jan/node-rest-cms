@@ -1,7 +1,7 @@
 <md-toolbar layout="row" layout-align="start end">
     <span> <h2 class="md-toolbar-tools"> Node Rest CMS </h2></span>
-    <md-button md-ripple-size="full" ng-repeat="item in menuItems" ui-sref="main.page({id: item.slug})"
-               aria-label="{{item.title}}"> {{item.title}}
+    <md-button md-ripple-size="full" ng-repeat="item in menu" ng-href="{{item.path}}"
+               aria-label=""> {{item.title}}
     </md-button>
     <md-button md-ripple-size="full" ui-sref="admin">
         Admin

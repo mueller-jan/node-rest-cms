@@ -12,11 +12,25 @@ module.exports = function () {
 
     //get pages
     controller.addAction('GET', '/pages', function (req, res, next) {
-        Page.find().exec(function (err, list) {
-            if (err) return next(controller.RESTError('InternalServerError', err));
-            res.send(list);
-        });
+
+        var filterByType = false || req.params.type;
+
+        if (filterByType) {
+            console.log("Filtering by type: " + filterByType)
+            Page
+                .find({type: filterByType})
+                .exec(function (err, list) {
+                    if (err) return next(controller.RESTError('InternalServerError', err))
+                    res.send(list);
+                })
+        } else {
+            Page.find().exec(function (err, list) {
+                if (err) return next(controller.RESTError('InternalServerError', err));
+                res.send(list);
+            });
+        }
     }, true);
+
 
     //get page by id or slug
     controller.addAction('GET', '/pages/:id', function (req, res, next) {
@@ -63,13 +77,13 @@ module.exports = function () {
         if (id) {
             Page.findOne({_id: id})
                 .exec(function (err, p) {
-                if (err) return next(controller.RESTError('InternalServerError', err));
-                p = _.extend(p, body);
-                p.save(function (err, p) {
                     if (err) return next(controller.RESTError('InternalServerError', err));
-                    res.send(p);
-                });
-            })
+                    p = _.extend(p, body);
+                    p.save(function (err, p) {
+                        if (err) return next(controller.RESTError('InternalServerError', err));
+                        res.send(p);
+                    });
+                })
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))
         }

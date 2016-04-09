@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 
 var layout = new Schema({
@@ -8,8 +7,6 @@ var layout = new Schema({
     content: String,
     items: [{type: mongoose.Schema.Types.ObjectId, ref: 'Menu'}]
 });
-
-layout.plugin(deepPopulate);
 
 module.exports = mongoose.model('Layout', layout);
 

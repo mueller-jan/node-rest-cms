@@ -6,6 +6,7 @@ angular.module('services.error', ['app.config'])
     function ($q, $rootScope, ERROR_EVENTS) {
         return {
             responseError: function(err) {
+                console.log(err)
                 $rootScope.$broadcast(ERROR_EVENTS.error, err);
             }
         }

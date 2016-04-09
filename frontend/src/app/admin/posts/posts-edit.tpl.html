@@ -1,0 +1,24 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{page.title}}</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <form name="myForm" ng-submit="submit()">
+            Post-Title: <input ng-model="page.title"/>
+            <br/>
+            Post-Content:
+            <div text-angular ng-model="page.content"></div>
+            <br/>
+            Slug: <input ng-model="page.slug"/>
+            <input type="submit" id="submit" value="Submit"/>
+            <br/>
+            Add to category:
+            <label ng-repeat="category in categories">
+                <br/>
+                <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{category.title}}
+            </label>
+        </form>
+    </md-card-content>
+</md-card>

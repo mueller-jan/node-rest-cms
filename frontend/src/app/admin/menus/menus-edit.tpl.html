@@ -1,17 +1,17 @@
 <md-card>
     <md-card-title>
         <md-card-title-text>
-            <span class="md-headline">{{menu.name}} </span>
+            <span class="md-headline">{{menu.title}} </span>
         </md-card-title-text>
     </md-card-title>
     <md-card-content>
         <form name="myForm" ng-submit="submit()">
-            Menu-Name: <input ng-model="menu.name"/>
+            Menu-Name: <input ng-model="menu.title"/>
             <br/>
             Pages to include:
             <label ng-repeat="page in pages">
                 <br/>
-                <input type="checkbox" checklist-model="menu.items" checklist-value="page._id"> {{page.title}}
+                <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{page.title}}
             </label>
             <br/>
             <input type="submit" id="submit" value="Submit"/>

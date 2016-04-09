@@ -26,6 +26,10 @@ angular.module('admin.pages-edit', [
                 $scope.page = res.data;
             });
 
+            crudService.getMenus().then(function (res) {
+                $scope.menus = res.data;
+            });
+
             $scope.submit = function () {
                 crudService.updatePage($scope.page._id, $scope.page);
             };

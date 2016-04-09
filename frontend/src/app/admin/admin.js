@@ -7,6 +7,10 @@ angular.module('app.admin', [
         'admin.menus-new',
         'admin.users-list',
         'admin.users-new',
+        'admin.posts-list',
+        'admin.posts-edit',
+        'admin.posts-new',
+        'admin.categories-list',
         'admin.media',
         'ui.router'
     ])

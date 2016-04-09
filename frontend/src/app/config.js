@@ -1,5 +1,6 @@
 angular.module('app.config', [])
     .constant('API_URL', 'http://localhost:3000')
+    .constant('BASE_URL', 'http://localhost:63342/node-rest-cms/frontend/src/index.html')
 
     .constant('USER_ROLES', {
         all: '*',

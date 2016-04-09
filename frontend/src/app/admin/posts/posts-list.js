@@ -1,25 +1,25 @@
-angular.module('admin.pages-list', [
+angular.module('admin.posts-list', [
         'services.crud',
         'ui.router'
     ])
 
     .config(function config($stateProvider) {
-        $stateProvider.state('admin.pages-list', {
-            url: '/pages',
+        $stateProvider.state('admin.posts-list', {
+            url: '/posts',
             views: {
                 "content": {
-                    controller: 'ListPagesCtrl',
-                    templateUrl: 'app/admin/pages/pages-list.tpl.html'
+                    controller: 'ListPostsCtrl',
+                    templateUrl: 'app/admin/posts/posts-list.tpl.html'
                 }
             },
-            data: {pageTitle: 'admin.pages'}
+            data: {pageTitle: 'admin.posts'}
         });
     })
 
-    .controller('ListPagesCtrl',
-        function ListPagesController($scope, crudService) {
-            crudService.getPages('?type=page').then(function (res) {
-                $scope.pages = res.data;
+    .controller('ListPostsCtrl',
+        function ListPostsController($scope, crudService) {
+            crudService.getPages('?type=post').then(function (res) {
+                $scope.posts = res.data;
             });
 
             $scope.deletePage = function(id) {

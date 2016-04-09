@@ -2,8 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var menu = new Schema({
-    name: String,
-    items: [{type: mongoose.Schema.Types.ObjectId, ref: 'Page'}]
+    title: String,
+    items: [{
+        title: String,
+        path: String
+    }]
+
 });
 
 module.exports = mongoose.model('Menu', menu);

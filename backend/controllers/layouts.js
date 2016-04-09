@@ -12,11 +12,14 @@ module.exports = function () {
 
     //get layouts
     controller.addAction('GET', '/layout', function (req, res, next) {
+        console.log("layout")
         Layout.find()
-            .deepPopulate('items.items')
+            .populate('items')
             .exec(function (err, list) {
             if (err) return next(controller.RESTError('InternalServerError', err));
-            res.send(list);
+            console.log("list")
+                console.log(list)
+                res.send(list);
         });
     }, false);
 
