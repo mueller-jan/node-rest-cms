@@ -22,16 +22,16 @@ module.exports = function () {
     controller.addAction('PUT', '/categories/:id', function (req, res, next) {
         var body = req.body;
         var id = req.params.id;
+
+        console.log('update cat')
+        console.log(body)
+
         if (id) {
-            Category.findOne({_id: id})
-                .exec(function (err, c) {
-                    if (err) return next(controller.RESTError('InternalServerError', err));
-                    c = _.extend(c, body);
-                    c.save(function (err, c) {
-                        if (err) return next(controller.RESTError('InternalServerError', err));
-                        res.send(c);
-                    })
-                })
+            Category.findOneAndUpdate({_id: id}, body, function (err, c) {
+                if (err) console.log(err)
+                if (err) return next(controller.RESTError('InternalServerError', err));
+                res.send(c);
+            });
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id received'))
         }
@@ -52,10 +52,32 @@ module.exports = function () {
         }
     }, false);
 
+    //get category
+    controller.addAction('GET', '/categories/:id', function(req, res, next) {
+        var id = req.params.id;
+        if (id) {
+            //find id or slug
+            var query = {$or: [{slug: id}]};
+            if (id.match(/^[0-9a-fA-F]{24}$/)) {
+                query.$or.push({_id: id});
+            }
+
+            Category.findOne(query)
+                .exec(function (err, c) {
+                if (err) return next(err);
+                if (!c) {
+                    return next(controller.RESTError('ResourceNotFoundError', 'Not found'));
+                }
+                res.send(c);
+            })
+        } else {
+            next(controller.RESTError('InvalidArgumentError', 'Invalid id'))
+        }
+    });
+
 
     //get pages from category
     controller.addAction('GET', '/categories/:id/pages', function (req, res, next) {
-        console.log("get pages from cat")
         var id = req.params.id;
         if(id) {
 

@@ -11,6 +11,8 @@ angular.module('app.admin', [
         'admin.posts-edit',
         'admin.posts-new',
         'admin.categories-list',
+        'admin.categories-edit',
+        'admin.categories-new',
         'admin.media',
         'ui.router'
     ])

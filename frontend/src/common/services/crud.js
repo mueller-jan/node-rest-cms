@@ -38,8 +38,12 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/categories');
             },
 
+            getCategory: function(id) {
+                return $http.get(API_URL + /categories/ + id)
+            },
+
             updateCategory: function (id, category) {
-                return $http.put(API_URL + '/category/' + id, category, {headers: {'Content-Type': 'application/json'}});
+                return $http.put(API_URL + '/categories/' + id, category, {headers: {'Content-Type': 'application/json'}});
             },
 
             getPagesFromCategory: function(id) {

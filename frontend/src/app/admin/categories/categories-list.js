@@ -9,7 +9,7 @@ angular.module('admin.categories-list', [
             views: {
                 "content": {
                     controller: 'ListCategoriesCtrl',
-                    templateUrl: 'app/admin/posts/categories-list.tpl.html'
+                    templateUrl: 'app/admin/categories/categories-list.tpl.html'
                 }
             },
             data: {pageTitle: 'admin.categories'}
@@ -19,19 +19,19 @@ angular.module('admin.categories-list', [
     .controller('ListCategoriesCtrl',
         function ListCategoriesController($scope, crudService) {
             crudService.getCategories().then(function (res) {
-               $scope.categories = res.data; 
+                $scope.categories = res.data;
             });
             
-            crudService.getPages().then(function (res) {
-                $scope.pages = res.data;
+            crudService.getPages().then(function(res) {
+               $scope.pages = res.data; 
             });
 
-            $scope.deletePage = function(id) {
-                crudService.deletePage(id).then(function (res) {
-                    crudService.getPages().then(function (res) {
-                        $scope.pages = res.data;
-                    });
-                });
+            $scope.deleteCategory = function (id) {
+                //     crudService.delete(id).then(function (res) {
+                //         crudService.getPages().then(function (res) {
+                //             $scope.pages = res.data;
+                //         });
+                //     });
             }
         });
 

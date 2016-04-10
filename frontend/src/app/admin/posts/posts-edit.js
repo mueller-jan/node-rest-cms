@@ -21,6 +21,7 @@ angular.module('admin.posts-edit', [
     .controller('EditPostsCtrl',
         function EditPostsController($scope, $stateParams, crudService) {
             $scope.pageId = $stateParams.id;
+            $scope.selectedCategories = [];
 
             crudService.getPage($scope.pageId).then(function (res) {
                 $scope.page = res.data;
@@ -31,7 +32,6 @@ angular.module('admin.posts-edit', [
             });
 
             $scope.submit = function () {
-                // crudService.updateCategory($scope.page._id, $scope.page);
                 crudService.updatePage($scope.page._id, $scope.page);
             };
         });

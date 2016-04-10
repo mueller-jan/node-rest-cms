@@ -13,12 +13,6 @@
             <br/>
             Slug: <input ng-model="page.slug"/>
             <input type="submit" id="submit" value="Submit"/>
-            <br/>
-            Add to category:
-            <label ng-repeat="category in categories">
-                <br/>
-                <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{category.title}}
-            </label>
         </form>
     </md-card-content>
 </md-card>

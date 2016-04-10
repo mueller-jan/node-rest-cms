@@ -1,0 +1,26 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{category.title}} </span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <form name="myForm" ng-submit="submit()">
+            Category-Title: <input ng-model="category.title"/>
+            <br/>
+            Slug: <input ng-model="category.slug"/>
+            <br/>
+            Description: <input ng-model="category.description">
+            <br>
+            Posts in this category
+            <label ng-repeat="page in pages">
+                <br/>
+                <input type="checkbox" checklist-model="category.pages" checklist-value="page._id"> {{page.title}}
+            </label>
+            <br/>
+            <input type="submit" id="submit" value="Submit"/>
+        </form>
+    </md-card-content>
+</md-card>
+
+

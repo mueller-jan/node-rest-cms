@@ -6,6 +6,7 @@ var category = new Schema({
     title: {type: String, index: true, unique: true, required: true},
     parent: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
     pages: [{type: mongoose.Schema.Types.ObjectId, ref: 'Page'}],
+    description: String
 });
 
 module.exports = mongoose.model('Category', category);

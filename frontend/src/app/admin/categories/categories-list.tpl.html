@@ -9,13 +9,13 @@
             <tr ng-repeat="category in categories">
                 <td>{{ category.title }}</td>
                 <td>
-                    <md-button ui-sref="admin.pages-edit({id: page.slug})" class="md-icon-button md-accent">
+                    <md-button ui-sref="admin.categories-edit({id: category.slug})" class="md-icon-button md-accent">
                         <md-icon>build</md-icon>
                     </md-button>
                 </td>
 
                 <td>
-                    <md-button ng-click="deletePage(page._id)" class="md-icon-button md-accent">
+                    <md-button ng-click="deleteCategory(category._id)" class="md-icon-button md-accent">
                         <md-icon>delete</md-icon>
                     </md-button>
                 </td>
