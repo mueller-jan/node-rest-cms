@@ -26,7 +26,6 @@ module.exports = function () {
 
     //get menu
     controller.addAction('GET', '/menus/:id', function (req, res, next) {
-        console.log(req.params.id)
         var id = req.params.id;
         if (id) {
             Menu.findOne({_id: id})
@@ -35,8 +34,6 @@ module.exports = function () {
                     if (!m) {
                         return next(controller.RESTError('ResourceNotFoundError', 'Not found'));
                     }
-                    console.log("menus")
-                    console.log(m)
                     res.send(m);
                 })
         } else {

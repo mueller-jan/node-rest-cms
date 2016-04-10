@@ -12,13 +12,10 @@ module.exports = function () {
 
     //get layouts
     controller.addAction('GET', '/layout', function (req, res, next) {
-        console.log("layout")
         Layout.find()
             .populate('items')
             .exec(function (err, list) {
             if (err) return next(controller.RESTError('InternalServerError', err));
-            console.log("list")
-                console.log(list)
                 res.send(list);
         });
     }, false);

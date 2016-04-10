@@ -16,11 +16,10 @@ module.exports = function () {
         var filterByType = false || req.params.type;
 
         if (filterByType) {
-            console.log("Filtering by type: " + filterByType)
             Page
                 .find({type: filterByType})
                 .exec(function (err, list) {
-                    if (err) return next(controller.RESTError('InternalServerError', err))
+                    if (err) return next(controller.RESTError('InternalServerError', err));
                     res.send(list);
                 })
         } else {

@@ -23,10 +23,8 @@ angular.module('app.main', [
         function MainController($scope, $state, $filter, crudService) {
             crudService.getLayout().then(function(res) {
                $scope.layout = res.data;
-                console.log($scope.layout)
                 var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
                 $scope.menu = toolbar.items[0].items;
-                console.log($scope.menu)
                 //$state.go('main.page', {id: $scope.menu.path});
             });
         });

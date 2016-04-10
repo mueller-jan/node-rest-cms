@@ -24,7 +24,6 @@ angular.module('services.auth', ['app.config'])
                 return $http
                     .post(API_URL + '/token', null, {headers: {'x-access-token': token}})
                     .then(function (res) {
-                        console.log(res)
                         if (res.data.success !== false) {
                             userService.create(res.data.user.name, res.data.user.role);
                         }

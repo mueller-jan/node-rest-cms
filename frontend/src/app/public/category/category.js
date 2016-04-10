@@ -24,9 +24,7 @@ angular.module('app.category', [
     .controller('CategoryCtrl',
         function CategoryController($scope, $stateParams, $sce, pages) {
             $scope.pages = pages.data.pages;
-            console.log($scope.pages)
             angular.forEach($scope.pages, function(page) {
-                console.log(page)
                 page.content = $sce.trustAsHtml(page.content);
             });
                 // $scope.pages = page.data;

@@ -22,13 +22,8 @@ module.exports = function () {
     controller.addAction('PUT', '/categories/:id', function (req, res, next) {
         var body = req.body;
         var id = req.params.id;
-
-        console.log('update cat')
-        console.log(body)
-
         if (id) {
             Category.findOneAndUpdate({_id: id}, body, function (err, c) {
-                if (err) console.log(err)
                 if (err) return next(controller.RESTError('InternalServerError', err));
                 res.send(c);
             });
@@ -91,7 +86,6 @@ module.exports = function () {
                 .findOne(query)
                 .populate('pages')
                 .exec(function(err, p) {
-                    console.log(p)
                     if(err) return next(controller.RESTError('InternalServerError', err));
                     if(!p) {
                         return next(controller.RESTError('ResourceNotFoundError', 'Pages not found'))
