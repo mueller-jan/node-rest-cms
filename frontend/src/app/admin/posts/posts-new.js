@@ -19,6 +19,7 @@ angular.module('admin.posts-new', [
     .controller('NewPostsCtrl',
         function NewPostsController($scope, crudService) {
             $scope.submit = function () {
+                $scope.page.type = 'post';
                 crudService.createPage($scope.page).then(onSuccess, onError);
             };
 

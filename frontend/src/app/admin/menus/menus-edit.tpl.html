@@ -13,6 +13,15 @@
                 <br/>
                 <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{page.title}}
             </label>
+
+            <br/>
+
+            Categories to include:
+            <label ng-repeat="category in categories">
+                <br/>
+                <input type="checkbox" checklist-model="categoriesToInclude" checklist-value="category"> {{category.title}}
+            </label>
+
             <br/>
             <input type="submit" id="submit" value="Submit"/>
         </form>

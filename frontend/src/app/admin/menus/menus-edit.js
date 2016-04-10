@@ -21,9 +21,16 @@ angular.module('admin.menus-edit', [
         function EditMenusController($scope, $stateParams, crudService, BASE_URL) {
             $scope.pageId = $stateParams.id;
             $scope.pagesToInclude = [];
+            $scope.categoriesToInclude = [];
+            
+            
 
             crudService.getPages().then(function (res) {
                 $scope.pages = res.data;
+            });
+            
+            crudService.getCategories().then(function (res) {
+               $scope.categories = res.data;
             });
 
             crudService.getMenu($stateParams.id).then(function (res) {
@@ -34,6 +41,9 @@ angular.module('admin.menus-edit', [
             $scope.submit = function () {
                 for (var i = 0; i < $scope.pagesToInclude.length; i++) {
                     $scope.menu.items.push({'title': $scope.pagesToInclude[i].title, 'path': BASE_URL + '#/page/' + $scope.pagesToInclude[i].slug});
+                }
+                for (var i = 0; i <$scope.categoriesToInclude.length; i++) {
+                    $scope.menu.items.push({'title': $scope.categoriesToInclude[i].title, 'path': BASE_URL + '#/category/' + $scope.categoriesToInclude[i].slug});
                 }
                 crudService.updateMenu($scope.menu._id, $scope.menu);
             };

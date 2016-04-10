@@ -23,10 +23,6 @@ angular.module('admin.categories-edit', [
 
             crudService.getPages('?type=post').then(function (res) {
                 $scope.pages = res.data;
-                $scope.pageIds = [];
-                for (var i = 0; i< $scope.pages.length; i++) {
-                    $scope.pageIds.push($scope.pages[i]._id);
-                }
             });
 
             crudService.getCategory($scope.categoryId).then(function (res) {

@@ -22,6 +22,10 @@ angular.module('admin.menus-new', [
                 $scope.pages = res.data;
             });
 
+            crudService.getCategories().then(function (res) {
+                $scope.categories = res.data;
+            });
+
             $scope.submit = function () {
                 crudService.createMenu($scope.menu);
             };
