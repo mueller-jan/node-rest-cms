@@ -1,51 +1,93 @@
-<md-card>
-    <md-card-title>
-        <md-card-title-text>
-            <span class="md-headline">{{menu.title}} </span>
-        </md-card-title-text>
-    </md-card-title>
-    <md-card-content>
-        <form name="myForm" ng-submit="submit()">
+<form name="myForm" ng-submit="submit()">
+    <md-card>
+        <md-card-title>
+            Menu-Title
+        </md-card-title>
+        <md-card-content>
             <md-input-container>
                 <label>Menu-Title</label>
                 <input ng-model="menu.title">
             </md-input-container>
+        </md-card-content>
+    </md-card>
 
-            Pages to include:
-            <div ng-repeat="page in pages">
-                <label>
-                    <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{page.title}}
-                </label>
-            </div>
-            <br/>
+    <div layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="70" layout="column">
+            <md-card>
+                <md-card-title>
+                    Menu-Items
+                </md-card-title>
+                <md-card-content>
+                    <ul dnd-list="itemsToInclude">
+                        <!-- The dnd-draggable directive makes an element draggable and will
+                             transfer the object that was assigned to it. If an element was
+                             dragged away, you have to remove it from the original list
+                             yourself using the dnd-moved attribute -->
+                        <li ng-repeat="item in itemsToInclude"
+                            dnd-draggable="item"
+                            dnd-moved="itemsToInclude.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="models.selected = item"
+                            ng-class="{'selected': models.selected === page}"
+                        >
+                            <div dnd-nodrag>
+                                <div flex layout="row">
+                                    <div flex="80" layout="row">
+                                                <span dnd-handle class="handle">
+                                                    <md-icon>open_with</md-icon>
+                                                </span>
+                                        <h4>{{item.title}}</h4>
+                                    </div>
+                                    <div flex layout="row">
+                                        <md-button class="md-icon-button" ng-mouseup="deleteItem(item)">
+                                            <md-icon>delete</md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>
+                                <div ng-show="false">
+                                    <md-input-container>
+                                        <label>Menu-Title</label>
+                                        <input ng-model="item.title" disabled>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Menu-Path</label>
+                                        <input ng-model="item.path" disabled>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </md-card-content>
+            </md-card>
+        </div>
 
-            Categories to include:
-            <div ng-repeat="category in categories">
-                <label>
+        <div flex-xs flex-gt-xs="30" layout="column">
+            <md-card>
+                <md-card-title>Pages</md-card-title>
+                <md-card-content>
+                    <div ng-repeat="item in pageItems">
+                        <label>
+                            <input type="checkbox" checklist-model="itemsToInclude" checklist-value="item">
+                            {{item.title}}
+                        </label>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-card-title>
+                    Categories
+                </md-card-title>
+                <md-card-content>
+                    <div ng-repeat="item in categoryItems">
+                        <label>
+                            <input type="checkbox" checklist-model="itemsToInclude" checklist-value="item">
+                            {{item.title}}
+                        </label>
+                    </div>
                     <br/>
-                    <input type="checkbox" checklist-model="categoriesToInclude" checklist-value="category">
-                    {{category.title}}
-                </label>
-            </div>
-            <br/>
-
-            <table>
-                <tr ng-repeat="page in pagesToInclude">
-                    <td>{{page.title}}</td>
-                    <td>
-
-                    </td>
-
-                    <td>
-
-                    </td>
-                </tr>
-            </table>
-            <br/>
-            
-            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">Submit</md-button>
-        </form>
-    </md-card-content>
-</md-card>
-
-
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">Submit</md-button>
+</form>

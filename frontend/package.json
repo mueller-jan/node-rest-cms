@@ -15,8 +15,9 @@
     "run-sequence": "^1.1.4"
   },
   "dependencies": {
+    "angular-drag-and-drop-lists": "^1.4.0",
     "angular-ui-router": "^0.2.18",
-    "textangular": "^1.5.0",
-    "font-awesome": ">=4.0.x"
+    "font-awesome": ">=4.0.x",
+    "textangular": "^1.5.0"
   }
 }
