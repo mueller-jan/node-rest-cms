@@ -26,7 +26,7 @@ var app = angular.module('app', [
         $httpProvider.interceptors.push('errorInterceptor');
     }])
 
-    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, $mdDialog) {
+    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, $mdDialog, $mdToast, AUTH_EVENTS, SUCCESS_EVENTS) {
         $rootScope.$on("error", function(e, error) {
             $mdDialog.show(
                 $mdDialog.alert()
@@ -38,6 +38,18 @@ var app = angular.module('app', [
                     .ok('OK')
             );
         });
+
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
+            $scope.openToast('Login success');
+        });
+
+        $rootScope.$on(SUCCESS_EVENTS.success, function (e, message) {
+            $scope.openToast(message);
+        });
+
+        $scope.openToast = function(message) {
+            $mdToast.show($mdToast.simple().textContent(message));
+        };
 
         $scope.currentUser = null;
 

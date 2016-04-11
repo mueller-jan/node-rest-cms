@@ -16,6 +16,12 @@ angular.module('app.config', [])
         notAuthenticated: 'auth-not-authenticated',
         notAuthorized: 'auth-not-authorized'
     })
+    .constant('SUCCESS_EVENTS', {
+        success: 'success',
+        successUpdate: 'update-success',
+        successCreate: 'create-success',
+        successDelete: 'delete-success'
+    })
     .constant('ERROR_EVENTS', {
         error: 'error'
 });

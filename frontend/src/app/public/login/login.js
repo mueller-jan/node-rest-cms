@@ -17,7 +17,7 @@ angular.module('app.login', [
     })
 
     .controller('LoginCtrl',
-        function LoginController($scope, $rootScope, AUTH_EVENTS, authService) {
+        function LoginController($scope, $rootScope, $state, AUTH_EVENTS, authService) {
             $scope.credentials = {
                 username: '',
                 password: ''
@@ -27,6 +27,7 @@ angular.module('app.login', [
                 authService.login(credentials).then(function (user) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     $scope.setCurrentUser(user);
+                    $state.go('admin')
                 }, function () {
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });

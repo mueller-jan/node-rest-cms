@@ -18,19 +18,18 @@ angular.module('admin.menus-edit', [
     })
 
     .controller('EditMenusCtrl',
-        function EditMenusController($scope, $stateParams, crudService, BASE_URL) {
+        function EditMenusController($scope, $rootScope, $state, $stateParams, crudService, BASE_URL, SUCCESS_EVENTS) {
             $scope.pageId = $stateParams.id;
+
             $scope.pagesToInclude = [];
             $scope.categoriesToInclude = [];
-            
-            
 
             crudService.getPages().then(function (res) {
                 $scope.pages = res.data;
             });
-            
+
             crudService.getCategories().then(function (res) {
-               $scope.categories = res.data;
+                $scope.categories = res.data;
             });
 
             crudService.getMenu($stateParams.id).then(function (res) {
@@ -39,13 +38,25 @@ angular.module('admin.menus-edit', [
             });
 
             $scope.submit = function () {
-                for (var i = 0; i < $scope.pagesToInclude.length; i++) {
-                    $scope.menu.items.push({'title': $scope.pagesToInclude[i].title, 'path': BASE_URL + '#/page/' + $scope.pagesToInclude[i].slug});
+                var i;
+                for (i = 0; i < $scope.pagesToInclude.length; i++) {
+                    $scope.menu.items.push({
+                        'title': $scope.pagesToInclude[i].title,
+                        'path': BASE_URL + '#/page/' + $scope.pagesToInclude[i].slug
+                    });
                 }
-                for (var i = 0; i <$scope.categoriesToInclude.length; i++) {
-                    $scope.menu.items.push({'title': $scope.categoriesToInclude[i].title, 'path': BASE_URL + '#/category/' + $scope.categoriesToInclude[i].slug});
+                for (i = 0; i < $scope.categoriesToInclude.length; i++) {
+                    $scope.menu.items.push({
+                        'title': $scope.categoriesToInclude[i].title,
+                        'path': BASE_URL + '#/category/' + $scope.categoriesToInclude[i].slug
+                    });
                 }
-                crudService.updateMenu($scope.menu._id, $scope.menu);
+                crudService.updateMenu($scope.menu._id, $scope.menu).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'Menu updated.');
+                        $state.go('admin.menus-list');
+                    }
+                });
             };
         });
 

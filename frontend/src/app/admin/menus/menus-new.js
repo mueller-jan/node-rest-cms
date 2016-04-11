@@ -17,7 +17,7 @@ angular.module('admin.menus-new', [
     })
 
     .controller('NewMenusCtrl',
-        function NewMenusController($scope, crudService) {
+        function NewMenusController($scope, $rootScope, $state, crudService, SUCCESS_EVENTS) {
             crudService.getPages().then(function (res) {
                 $scope.pages = res.data;
             });
@@ -27,10 +27,14 @@ angular.module('admin.menus-new', [
             });
 
             $scope.submit = function () {
-                crudService.createMenu($scope.menu);
+                crudService.createMenu($scope.menu).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'Menu created.');
+                        $state.go('admin.menus-list');
+                    }
+                });
             };
         });
-
 
 
 

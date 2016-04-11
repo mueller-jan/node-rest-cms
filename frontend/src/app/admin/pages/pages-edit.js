@@ -19,7 +19,7 @@ angular.module('admin.pages-edit', [
     })
 
     .controller('EditPagesCtrl',
-        function EditPagesController($scope, $stateParams, crudService) {
+        function EditPagesController($scope, $rootScope, $stateParams, crudService, SUCCESS_EVENTS) {
             $scope.pageId = $stateParams.id;
 
             crudService.getPage($scope.pageId).then(function (res) {
@@ -31,7 +31,12 @@ angular.module('admin.pages-edit', [
             });
 
             $scope.submit = function () {
-                crudService.updatePage($scope.page._id, $scope.page);
+                crudService.updatePage($scope.page._id, $scope.page).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'Page updated.');
+                        $state.go('admin.pages-list');
+                    }
+                });
             };
         });
 

@@ -17,15 +17,16 @@ angular.module('admin.pages-new', [
     })
 
     .controller('NewPagesCtrl',
-        function NewPagesController($scope, crudService) {
+        function NewPagesController($scope, $rootScope, $state, crudService, SUCCESS_EVENTS) {
             $scope.submit = function () {
-                crudService.createPage($scope.page).then(onSuccess, onError);
+                $scope.page.type = 'page';
+                crudService.createPage($scope.page).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'New Page created.');
+                        $state.go('admin.pages-list');
+                    }
+                });
             };
-
-            function onSuccess(data) {
-            }
-            function onError(data) {
-            }
         });
 
 

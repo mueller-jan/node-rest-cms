@@ -19,7 +19,7 @@ angular.module('admin.posts-edit', [
     })
 
     .controller('EditPostsCtrl',
-        function EditPostsController($scope, $stateParams, crudService) {
+        function EditPostsController($scope, $rootScope, $stateParams, crudService, SUCCESS_EVENTS) {
             $scope.pageId = $stateParams.id;
             $scope.selectedCategories = [];
 
@@ -32,7 +32,12 @@ angular.module('admin.posts-edit', [
             });
 
             $scope.submit = function () {
-                crudService.updatePage($scope.page._id, $scope.page);
+                crudService.updatePage($scope.page._id, $scope.page).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'Post updated.');
+                        $state.go('admin.posts-list');
+                    }
+                });
             };
         });
 

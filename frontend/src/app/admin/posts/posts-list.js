@@ -24,8 +24,8 @@ angular.module('admin.posts-list', [
 
             $scope.deletePage = function(id) {
                 crudService.deletePage(id).then(function (res) {
-                    crudService.getPages().then(function (res) {
-                        $scope.pages = res.data;
+                    crudService.getPages('?type=post').then(function (res) {
+                        $scope.posts = res.data;
                     });
                 });
             }
