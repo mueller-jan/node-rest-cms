@@ -1,16 +1,24 @@
-<md-toolbar layout="row" layout-align="start end">
+<md-toolbar layout="row" layout-align="space-between center">
+    <!--left-->
     <span> <h2 class="md-toolbar-tools"> Node Rest CMS </h2></span>
-    <md-button md-ripple-size="full" ng-repeat="item in menu" ng-href="{{item.path}}"
-               aria-label=""> {{item.title}}
-    </md-button>
-    <md-button md-ripple-size="full" ui-sref="admin">
-        Admin
-    </md-button>
-    <md-button ng-show="currentUser" md-ripple-size="full" ng-click="logout()">
-        logout [{{currentUser.name}}]
-    </md-button>
 
-    <md-button ng-hide="currentUser" md-ripple-size="full" ui-sref="main.login">
-        login
-    </md-button>
+
+    <!--right-->
+    <span>
+        <md-button md-ripple-size="full" ng-repeat="item in menu" ng-href="{{item.path}}"
+                   aria-label=""> {{item.title}}
+        </md-button>
+
+        <md-button md-ripple-size="full" ui-sref="admin">
+            Admin
+        </md-button>
+
+        <!--<md-button ng-hide="currentUser" md-ripple-size="full" ng-click="logout()">-->
+            <!--logout-->
+        <!--</md-button>-->
+
+        <md-button ng-hide="currentUser" md-ripple-size="full" ui-sref="main.login">
+            login
+        </md-button>
+    </span>
 </md-toolbar>
