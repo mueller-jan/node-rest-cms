@@ -25,7 +25,6 @@ angular.module('app.main', [
                $scope.layout = res.data;
                 var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
                 $scope.menu = toolbar.items[0].items;
-                //$state.go('main.page', {id: $scope.menu.path});
             });
         });
 

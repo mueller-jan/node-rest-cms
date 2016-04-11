@@ -19,7 +19,7 @@ angular.module('admin.posts-edit', [
     })
 
     .controller('EditPostsCtrl',
-        function EditPostsController($scope, $rootScope, $stateParams, crudService, SUCCESS_EVENTS) {
+        function EditPostsController($scope, $rootScope, $state, $stateParams, crudService, SUCCESS_EVENTS) {
             $scope.pageId = $stateParams.id;
             $scope.selectedCategories = [];
 

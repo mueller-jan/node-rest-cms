@@ -18,7 +18,7 @@ angular.module('admin.categories-edit', [
     })
 
     .controller('EditCategoriesCtrl',
-        function EditCategoriesController($scope, $stateParams, crudService) {
+        function EditCategoriesController($scope, $rootScope, $state, $stateParams, crudService, SUCCESS_EVENTS) {
             $scope.categoryId = $stateParams.id;
 
             crudService.getPages('?type=post').then(function (res) {
@@ -30,7 +30,12 @@ angular.module('admin.categories-edit', [
             });
 
             $scope.submit = function () {
-                crudService.updateCategory($scope.category._id, $scope.category);
+                crudService.updateCategory($scope.category._id, $scope.category).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'Category updated.');
+                        $state.go('admin.categories-list');
+                    }
+                });
             };
         });
 

@@ -19,7 +19,7 @@ angular.module('admin.pages-edit', [
     })
 
     .controller('EditPagesCtrl',
-        function EditPagesController($scope, $rootScope, $stateParams, crudService, SUCCESS_EVENTS) {
+        function EditPagesController($scope, $rootScope, $state, $stateParams, crudService, SUCCESS_EVENTS) {
             $scope.pageId = $stateParams.id;
 
             crudService.getPage($scope.pageId).then(function (res) {
