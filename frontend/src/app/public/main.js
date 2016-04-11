@@ -20,11 +20,12 @@ angular.module('app.main', [
     })
 
     .controller('MainCtrl',
-        function MainController($scope, $state, $filter, crudService) {
+        function MainController($scope, $state, $filter, $location, crudService) {
             crudService.getLayout().then(function(res) {
                $scope.layout = res.data;
                 var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
                 $scope.menu = toolbar.items[0].items;
+                // $location.path($scope.menu[0].path)
             });
         });
 

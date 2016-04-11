@@ -53,9 +53,9 @@ var app = angular.module('app', [
 
         $scope.currentUser = null;
 
-        //authService.loginWithToken().then(function (data) {
-        //    $scope.currentUser = data
-        //});
+        authService.loginWithToken().then(function (data) {
+           $scope.currentUser = data
+        });
 
         $scope.isAuthorized = authService.isAuthorized;
 

@@ -6,24 +6,44 @@
     </md-card-title>
     <md-card-content>
         <form name="myForm" ng-submit="submit()">
-            Menu-Name: <input ng-model="menu.title"/>
-            <br/>
-            Pages to include:
-            <label ng-repeat="page in pages">
-                <br/>
-                <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{page.title}}
-            </label>
+            <md-input-container>
+                <label>Menu-Title</label>
+                <input ng-model="menu.title">
+            </md-input-container>
 
+            Pages to include:
+            <div ng-repeat="page in pages">
+                <label>
+                    <input type="checkbox" checklist-model="pagesToInclude" checklist-value="page"> {{page.title}}
+                </label>
+            </div>
             <br/>
 
             Categories to include:
-            <label ng-repeat="category in categories">
-                <br/>
-                <input type="checkbox" checklist-model="categoriesToInclude" checklist-value="category"> {{category.title}}
-            </label>
-
+            <div ng-repeat="category in categories">
+                <label>
+                    <br/>
+                    <input type="checkbox" checklist-model="categoriesToInclude" checklist-value="category">
+                    {{category.title}}
+                </label>
+            </div>
             <br/>
-            <input type="submit" id="submit" value="Submit"/>
+
+            <table>
+                <tr ng-repeat="page in pagesToInclude">
+                    <td>{{page.title}}</td>
+                    <td>
+
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            
+            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">Submit</md-button>
         </form>
     </md-card-content>
 </md-card>

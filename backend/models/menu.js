@@ -5,7 +5,8 @@ var menu = new Schema({
     title: String,
     items: [{
         title: String,
-        path: String
+        path: String,
+        order: Number
     }]
 
 });
