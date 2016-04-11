@@ -1,10 +1,20 @@
-<form name="loginForm"
-      ng-submit="login(credentials)" novalidate>
-    <label for="username">Username:</label>
-    <input type="text" id="username"
-           ng-model="credentials.username">
-    <label for="password">Password:</label>
-    <input type="password" id="password"
-           ng-model="credentials.password">
-    <button type="submit">Login</button>
-</form>
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Login</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <form ng-submit="login(credentials)" name="loginForm">
+            <md-input-container>
+                <label>Login</label>
+                <input ng-model="credentials.username">
+            </md-input-container>
+            <md-input-container>
+                <label>Email</label>
+                <input ng-model="credentials.password">
+            </md-input-container>
+            <md-button class="md-raised md-primary" type="submit">Login</md-button>
+        </form>
+    </md-card-content>
+</md-card>

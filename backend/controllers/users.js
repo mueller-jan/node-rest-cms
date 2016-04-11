@@ -59,7 +59,7 @@ module.exports = function () {
 
                                 //if user is found and password is right create a token
                                 var token = jwt.sign(user, require('../lib').config.secret, {
-                                    expiresInMinutes: 1440 // expires in 24 hours
+                                    expiresIn: 86400 // expires in 24 hours
                                 });
 
                                 //return the information including token as JSON
