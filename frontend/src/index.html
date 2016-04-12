@@ -33,8 +33,11 @@
 
 
 <body layout="column">
+<div ng-include="'app/public/partials/toolbar.tpl.html'"></div>
+<md-content>
     <!--<md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>-->
     <div ui-view="main" layout="column"></div>
+</md-content>
 </body>
 
 <!-- Angular Material requires Angular.js Libraries -->

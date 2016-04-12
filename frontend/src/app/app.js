@@ -27,7 +27,7 @@ var app = angular.module('app', [
         $httpProvider.interceptors.push('errorInterceptor');
     }])
 
-    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, authService, $mdDialog, $mdToast, AUTH_EVENTS, SUCCESS_EVENTS) {
+    .controller('AppCtrl', function AppCtrl($scope, $rootScope, $window, $state, $mdDialog, $mdToast, $filter, crudService, authService, AUTH_EVENTS, SUCCESS_EVENTS) {
         $rootScope.$on("error", function(e, error) {
             $mdDialog.show(
                 $mdDialog.alert()
@@ -85,6 +85,12 @@ var app = angular.module('app', [
             if (angular.isDefined(toState.data.pageTitle)) {
                 $scope.pageTitle = toState.data.pageTitle;
             }
+        });
+
+        crudService.getLayout().then(function(res) {
+            $scope.layout = res.data;
+            var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
+            $scope.menu = toolbar.items[0].items;
         });
     });
 

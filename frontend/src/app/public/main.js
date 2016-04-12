@@ -11,22 +11,13 @@ angular.module('app.main', [
             url: '/',
             views: {
                 "main": {
-                    controller: 'MainCtrl',
                     templateUrl: 'app/public/main.tpl.html'
                 }
             },
             data: {pageTitle: 'main'}
         });
-    })
+    });
 
-    .controller('MainCtrl',
-        function MainController($scope, $state, $filter, crudService) {
-            crudService.getLayout().then(function(res) {
-               $scope.layout = res.data;
-                var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
-                $scope.menu = toolbar.items[0].items;
-            });
-        });
 
 
 
