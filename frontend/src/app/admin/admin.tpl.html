@@ -1,7 +1,9 @@
 <div layout="column">
     <div ng-include="'app/admin/toolbar.tpl.html'"></div>
-    <div layout="row">
-        <div flex="19" layout="column" ng-include="'app/admin/sidenav.tpl.html'"></div>
-        <div flex="60" ui-view="content"></div>
-    </div>
+    <md-content>
+        <div layout="row">
+            <div flex="19" layout="column" ng-include="'app/admin/sidenav.tpl.html'"></div>
+            <div flex="60" ui-view="content"></div>
+        </div>
+    </md-content>
 </div>

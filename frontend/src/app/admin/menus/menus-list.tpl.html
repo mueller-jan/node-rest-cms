@@ -1,28 +1,28 @@
 <md-card>
-    <md-content>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Menus</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <table>
-                <tr ng-repeat="menu in menus">
-                    <td>{{menu.title}}</td>
-                    <td>
-                        <md-button ui-sref="admin.menus-edit({id: menu._id})" class="md-icon-button md-accent">
-                            <md-icon>build</md-icon>
-                        </md-button>
-                    </td>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Menus</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <table>
+            <tr ng-repeat="menu in menus">
+                <td>{{menu.title}}</td>
+                <td>
+                    <md-button ui-sref="admin.menus-edit({id: menu._id})" class="md-icon-button md-accent">
+                        <md-icon>build</md-icon>
+                    </md-button>
+                </td>
 
-                    <td>
-                        <md-button  ng-click="deleteMenu(menu._id)" class="md-icon-button md-accent">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                    </td>
-                </tr>
-            </table>
-            <md-button class="md-fab md-mini" ui-sref="admin.menus-new" class="md-raised md-primary"><md-icon>add</md-icon></md-button>
-        </md-card-content>
-    </md-content>
+                <td>
+                    <md-button ng-click="deleteMenu(menu._id)" class="md-icon-button md-accent">
+                        <md-icon>delete</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </table>
+        <md-button class="md-fab md-mini" ui-sref="admin.menus-new" class="md-raised md-primary">
+            <md-icon>add</md-icon>
+        </md-button>
+    </md-card-content>
 </md-card>

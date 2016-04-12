@@ -52,7 +52,7 @@ module.exports = {
                 var category = new Category({
                     slug: 'blog',
                     title: 'Blog',
-                    pages: [page, page1]
+                    pages: [page1]
                 });
 
                 category.save(function (err) {

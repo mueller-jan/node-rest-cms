@@ -1,7 +1,5 @@
-.bg {
-    background-color: #eee !important;
-    min-height: 100%;
-    height: auto;
+md-content {
+    background-color: #C7C7C7;
 }
 
 #popupContainer {
