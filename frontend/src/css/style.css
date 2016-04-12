@@ -2,8 +2,17 @@ md-content {
     background-color: #C7C7C7;
 }
 
+body.layout-column {
+    background-color: #C7C7C7;
+}
+
 .content {
     height:90vh;
+}
+
+.footer {
+    height: 3vh;
+
 }
 
 #popupContainer {
