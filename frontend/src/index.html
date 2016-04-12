@@ -23,6 +23,7 @@
     <title>Homepage</title>
 </head>
 
+<!-- Popup-Container for error messages -->
 <div id="popupContainer">
     <md-dialog aria-label="List dialog">
         <md-dialog-actions>
@@ -31,8 +32,9 @@
     </md-dialog>
 </div>
 
-
 <body layout="column">
+<!--toolbar has to be included here in order to be sticky-->
+<!--sticky doesn't work well within ui-views-->
 <div ng-if="layout.header.enabled" ng-show="showToolbar" ng-include="'app/public/partials/toolbar.tpl.html'"></div>
 <md-content>
     <!--<md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>-->
@@ -56,8 +58,10 @@
 <script src='../node_modules/textangular/dist/textAngular-sanitize.min.js'></script>
 <script src='../node_modules/textangular/dist/textAngular.min.js'></script>
 
+<!-- drag & drop functionality -->
 <script src='../node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js'></script>
 
+<!-- automatically injected by gulp task "index">
 <!-- inject:js -->
 <script src="../vendor/angular-ui-router.min.js"></script>
 <script src="app/public/page/page.js"></script>
