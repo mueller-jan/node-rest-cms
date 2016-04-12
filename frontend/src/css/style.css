@@ -2,6 +2,10 @@ md-content {
     background-color: #C7C7C7;
 }
 
+.content {
+    height:90vh;
+}
+
 #popupContainer {
     height: 0px;
 }
