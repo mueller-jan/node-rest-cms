@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var layout = new Schema({
+var configuration = new Schema({
+    frontpage: String,
     selected: Boolean,
     header: {
         content: String,
@@ -26,5 +27,5 @@ var layout = new Schema({
     }
 });
 
-module.exports = mongoose.model('Layout', layout);
+module.exports = mongoose.model('Configuration', configuration);
 

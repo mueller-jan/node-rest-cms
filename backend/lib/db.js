@@ -2,7 +2,7 @@ var config = require("./config");
 var _ = require("underscore");
 var mongoose = require("mongoose");
 var Page = require('../models/page');
-var Layout = require('../models/layout');
+var Configuration = require('../models/configuration');
 var Menu = require('../models/menu');
 var User = require('../models/user');
 var Category = require('../models/category');
@@ -15,10 +15,9 @@ module.exports = {
     },
 
     setup: function () {
-        Layout.count({}, function (err, result) {
+        Configuration.count({}, function (err, result) {
             if (err) throw err;
             if (result === 0) {
-                console.log("prefill database");
                 var user = new User({name: 'admin', password: 'admin', role: 'admin'});
                 user.save(function (err) {
                     if (err) throw err;
@@ -75,7 +74,8 @@ module.exports = {
                     if (err) throw err;
                 });
 
-                var layout = new Layout({
+                var configuration = new Configuration({
+                    frontpage: "http://localhost:63342/node-rest-cms/frontend/src/index.html#/page/start",
                     selected: true,
                     header: {
                         content: 'Node CMS',
