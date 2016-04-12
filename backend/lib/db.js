@@ -15,8 +15,6 @@ module.exports = {
     },
 
     setup: function () {
-        var layoutElements = [];
-
         Layout.count({}, function (err, result) {
             if (err) throw err;
             if (result === 0) {
@@ -38,21 +36,21 @@ module.exports = {
                     if (err) throw err;
                 });
 
-                var page1 = new Page({
+                var post = new Page({
                     slug: 'page1',
                     date: new Date(),
-                    title: 'Page1',
+                    title: 'Post1',
                     type: 'post'
                 });
 
-                page1.save(function (err) {
+                post.save(function (err) {
                     if (err) throw err;
                 });
 
                 var category = new Category({
                     slug: 'blog',
                     title: 'Blog',
-                    pages: [page1]
+                    pages: [post]
                 });
 
                 category.save(function (err) {
@@ -63,8 +61,8 @@ module.exports = {
                     title: 'toolbar-menu',
                     items: [
                         {
-                            title: 'page1',
-                            path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/page/page1'
+                            title: 'Start',
+                            path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/page/start'
                         },
                         {
                             title: 'Blog',
@@ -77,26 +75,25 @@ module.exports = {
                     if (err) throw err;
                 });
 
-                layoutElements.push(new Layout({
-                    name: 'toolbar',
-                    content: 'NODE CMS',
-                    items: [menu]
-                }));
+                var layout = new Layout({
+                    selected: true,
+                    header: {
+                        content: 'Node CMS',
+                        enabled: true,
+                        menu: menu
+                    },
+                    footer: {
+                        content: 'Copyright Bla',
+                        enabled: true,
+                        menu: menu
+                    }
+                });
 
-                layoutElements.push(new Layout({
-                    name: 'sidebar-left'
-                }));
-
-                layoutElements.push(new Layout({
-                    name: 'footer'
-                }));
-
-                for (var i = 0; i < layoutElements.length; i++)
-                    layoutElements[i].save(function (err, l) {
-                        if (err) throw err;
-                    });
+                layout.save(function (err, l) {
+                    if (err) throw err;
+                });
             }
-        });
-    }
+        })
 
+    }
 };

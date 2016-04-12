@@ -89,8 +89,12 @@ var app = angular.module('app', [
 
         crudService.getLayout().then(function(res) {
             $scope.layout = res.data;
-            var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
-            $scope.menu = toolbar.items[0].items;
+            console.log($scope.layout);
+            console.log($scope.layout.enabled);
+            // var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
+            // $scope.menu = toolbar.items[0].items;
         });
+        
+        
     });
 

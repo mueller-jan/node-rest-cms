@@ -12,8 +12,8 @@ module.exports = function () {
 
     //get layouts
     controller.addAction('GET', '/layout', function (req, res, next) {
-        Layout.find()
-            .populate('items')
+        Layout.findOne({selected: true})
+            .populate('header.menu')
             .exec(function (err, list) {
             if (err) return next(controller.RESTError('InternalServerError', err));
                 res.send(list);
