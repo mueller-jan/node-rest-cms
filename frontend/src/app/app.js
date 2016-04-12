@@ -73,10 +73,13 @@ var app = angular.module('app', [
         $scope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
             $scope.loading = true;
             if (toState.name.indexOf('admin') > -1) {
+                $scope.showToolbar = false;
                 if (!authService.isAuthenticated() || !authService.isAuthorized()) {
                     $state.transitionTo("main.login");
                     event.preventDefault();
                 }
+            } else {
+                $scope.showToolbar = true;
             }
         });
 
