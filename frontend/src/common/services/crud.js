@@ -50,9 +50,13 @@ angular.module('services.crud', ['app.config'])
                 return $http.put(API_URL + '/categories/' + id, category, {headers: {'Content-Type': 'application/json'}});
             },
 
-            getPagesFromCategory: function (id, startDate) {
-                var params = startDate ? '?startDate=' + startDate : '';
-                return $http.get(API_URL + '/pages/categories/' + id + params);
+            //ids can be an array or a string
+            getPagesFromCategory: function (ids, startDate) {
+                ids = (ids.constructor === Array) ? '?ids=' + ids.toString() : '?ids='+ids;
+                console.log(Date.parse(startDate))
+                startDate = startDate ? '&startDate=' + startDate : '';
+                console.log(API_URL + '/pages/categories' + ids + startDate)
+                return $http.get(API_URL + '/pages/categories' + ids + startDate);
             },
 
             updatePage: function (id, page) {

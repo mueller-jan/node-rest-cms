@@ -31,30 +31,36 @@ module.exports = function () {
     }, true);
 
     //get posts from category
-    controller.addAction('GET', '/pages/categories/:id', function (req, res, next) {
-        var id = req.params.id;
+    controller.addAction('GET', '/pages/categories', function (req, res, next) {
+        var ids = req.params.ids.split(',');
+        console.log(req.params)
+        var startDate = req.params.startDate;
+        var endDate = req.params.endDate || new Date(0);
+        var limit = req.params.limit || 10;
+        var sort = req.params.sort || '-date';
+        console.log("srtatasdkrfasdöf")
+        console.log(startDate)
 
-        var startDate = false || req.params.startDate;
-        // console.log("SDATE")
-        // console.log(startDate)
-        //
+        var query = {
+            $and: [
+                {
+                    categories: {
+                        $in: ['blog']
+                    }
+                },
+                {type: 'post'},
+                {date: {$lt: startDate}}
+            ]
+        };
 
-        var query;
-        console.log("GET RES")
-        if (startDate) {
-            console.log("HAS TDSATE")
-            query = {$and: [{categories: id}, {type: 'post'},  {date: {$lt: startDate}} ]}
-        } else {
-            query = {$and: [{categories: id}, {type: 'post'}]}
-        }
+        console.log(query)
 
-        if (id) {
+        if (ids) {
             Page.find(query)
-                .limit( 10 )
-                .sort( '-date' )
+                .limit(limit)
+                .sort(sort)
                 .exec(function (err, list) {
                     if (err) return next(controller.RESTError('InternalServerError', err));
-                    console.log(list)
                     res.send(list);
                 });
         } else {

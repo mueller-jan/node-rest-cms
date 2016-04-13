@@ -24,20 +24,12 @@ module.exports = {
                 });
 
                 var category = new Category({
-                    _id: 'cat',
-                    title: 'Category'
+                    _id: 'blog',
+                    title: 'Blog'
                 });
 
                 category.save(function (err) {
                     if (err) throw err;
-                });
-
-                var post = new Page({
-                    slug: 'catpost',
-                    date: new Date(),
-                    title: 'catpost',
-                    type: 'post',
-                    categories: [category]
                 });
 
                 for (var i = 0; i < 1000; i++) {
@@ -76,8 +68,8 @@ module.exports = {
                             path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/page/start'
                         },
                         {
-                            title: 'cat',
-                            path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/category/cat'
+                            title: 'Blog',
+                            path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/category/blog'
                         }
                     ]
                 });

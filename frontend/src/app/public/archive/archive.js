@@ -1,28 +1,37 @@
-angular.module('app.category', [
+angular.module('app.archive', [
         'services.crud',
         'ui.router'
     ])
 
     .config(function config($stateProvider) {
-        $stateProvider.state('main.category', {
-            url: '^/category/:id',
+        $stateProvider.state('main.archive', {
+            url: '^/archive',
             views: {
                 "page-content": {
-                    controller: 'CategoryCtrl',
-                    templateUrl: 'app/public/category/category.tpl.html'
+                    controller: 'ArchiveCtrl',
+                    templateUrl: 'app/public/archive/archive.tpl.html'
                 }
             },
-            data: {pageTitle: 'category'},
-            resolve: {
-                pages: function (crudService, $stateParams) {
-                    return crudService.getPagesFromCategory($stateParams.id, new Date().getTime())
-                }
-            }
+            data: {pageTitle: 'archive'}
         });
     })
 
-    .controller('CategoryCtrl',
-        function CategoryController($scope, $stateParams, $sce, pages, crudService) {
+    .controller('ArchiveCtrl',
+        function ArchiveController($scope) {
+            $scope.myDate = new Date();
+            $scope.minDate = new Date(
+                $scope.myDate.getFullYear(),
+                $scope.myDate.getMonth() - 2,
+                $scope.myDate.getDate());
+            $scope.maxDate = new Date(
+                $scope.myDate.getFullYear(),
+                $scope.myDate.getMonth() + 2,
+                $scope.myDate.getDate());
+            $scope.onlyWeekendsPredicate = function (date) {
+                var day = date.getDay();
+                return day === 0 || day === 6;
+            };
+
             $scope.pages = pages.data;
             pagesToHTML($scope.pages);
 
@@ -44,7 +53,6 @@ angular.module('app.category', [
             }
 
             function getLastDate() {
-                console.log($scope.pages)
                 return $scope.pages[$scope.pages.length - 1].date;
             }
         });

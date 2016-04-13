@@ -9,16 +9,21 @@
                    aria-label=""> {{item.title}}
         </md-button>
 
+        <md-button md-ripple-size="full" ui-sref="main.archive">
+            Archive
+        </md-button>
+
         <md-button md-ripple-size="full" ui-sref="admin">
             Admin
         </md-button>
 
         <!--<md-button ng-hide="currentUser" md-ripple-size="full" ng-click="logout()">-->
-            <!--logout-->
+        <!--logout-->
         <!--</md-button>-->
 
         <md-button ng-hide="currentUser" md-ripple-size="full" ui-sref="main.login">
             login
         </md-button>
+
     </span>
 </md-toolbar>
