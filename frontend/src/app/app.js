@@ -92,7 +92,6 @@ var app = angular.module('app', [
 
         crudService.getConfiguration().then(function(res) {
             $scope.configuration = res.data;
-            console.log($scope.configuration)
             // var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
             // $scope.menu = toolbar.items[0].items;
         });

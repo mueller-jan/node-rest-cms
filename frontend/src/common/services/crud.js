@@ -51,11 +51,7 @@ angular.module('services.crud', ['app.config'])
             },
 
             getPagesFromCategory: function (id, startDate) {
-
                 var params = startDate ? '?startDate=' + startDate : '';
-                console.log("params");
-                console.log(params)
-                console.log(API_URL + '/pages/categories/' + id + params)
                 return $http.get(API_URL + '/pages/categories/' + id + params);
             },
 
