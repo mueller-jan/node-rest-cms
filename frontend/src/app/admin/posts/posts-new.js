@@ -18,6 +18,10 @@ angular.module('admin.posts-new', [
 
     .controller('NewPostsCtrl',
         function NewPostsController($scope, $rootScope, $state, crudService, SUCCESS_EVENTS) {
+            crudService.getCategories().then(function (res) {
+                $scope.categories = res.data;
+            });
+
             $scope.submit = function () {
                 $scope.page.type = 'post';
                 crudService.createPage($scope.page).then(function (res) {

@@ -23,6 +23,40 @@ module.exports = {
                     if (err) throw err;
                 });
 
+                var category = new Category({
+                    _id: 'cat',
+                    title: 'Category'
+                });
+
+                category.save(function (err) {
+                    if (err) throw err;
+                });
+
+                var post = new Page({
+                    slug: 'catpost',
+                    date: new Date(),
+                    title: 'catpost',
+                    type: 'post',
+                    categories: [category]
+                });
+
+                post.save(function (err) {
+                    if (err) throw err;
+                });
+
+                var post = new Page({
+                    slug: 'catpost1',
+                    date: new Date(),
+                    title: 'catpost1',
+                    type: 'post',
+                    categories: [category]
+                });
+
+                post.save(function (err) {
+                    if (err) throw err;
+                });
+
+
                 var page = new Page({
                     slug: 'start',
                     date: new Date(),
@@ -35,27 +69,6 @@ module.exports = {
                     if (err) throw err;
                 });
 
-                var post = new Page({
-                    slug: 'page1',
-                    date: new Date(),
-                    title: 'Post1',
-                    type: 'post'
-                });
-
-                post.save(function (err) {
-                    if (err) throw err;
-                });
-
-                var category = new Category({
-                    slug: 'blog',
-                    title: 'Blog',
-                    pages: [post]
-                });
-
-                category.save(function (err) {
-                    if (err) throw err;
-                });
-
                 var menu = new Menu({
                     title: 'toolbar-menu',
                     items: [
@@ -64,8 +77,8 @@ module.exports = {
                             path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/page/start'
                         },
                         {
-                            title: 'Blog',
-                            path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/category/blog'
+                            title: 'cat',
+                            path: 'http://localhost:63342/node-rest-cms/frontend/src/index.html#/category/cat'
                         }
                     ]
                 });
@@ -89,7 +102,7 @@ module.exports = {
                     }
                 });
 
-                layout.save(function (err, l) {
+                configuration.save(function (err, l) {
                     if (err) throw err;
                 });
             }

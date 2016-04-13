@@ -9,7 +9,7 @@
             <tr ng-repeat="category in categories">
                 <td>{{ category.title }}</td>
                 <td>
-                    <md-button ui-sref="admin.categories-edit({id: category.slug})" class="md-icon-button md-accent">
+                    <md-button ui-sref="admin.categories-edit({id: category._id})" class="md-icon-button md-accent">
                         <md-icon>build</md-icon>
                     </md-button>
                 </td>
@@ -22,7 +22,7 @@
             </tr>
         </table>
 
-        <md-button ui-sref="admin.pages-new" class="md-fab md-mini">
+        <md-button ui-sref="admin.categories-new" class="md-fab md-mini">
             <md-icon>add</md-icon>
         </md-button>
     </md-card-content>

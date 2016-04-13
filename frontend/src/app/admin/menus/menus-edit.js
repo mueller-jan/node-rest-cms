@@ -45,9 +45,10 @@ angular.module('admin.menus-edit', [
             function categoriesToMenuItems(categories) {
                 var catItems = [];
                 for (var i = 0; i < categories.length; i++) {
+                    console.log(categories[i]._id)
                     catItems.push({
                         'title': categories[i].title,
-                        'path': BASE_URL + '#/category/' + categories[i].slug
+                        'path': BASE_URL + '#/category/' + categories[i]._id
                     })
                 }
                 return catItems;

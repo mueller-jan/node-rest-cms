@@ -17,13 +17,19 @@ angular.module('admin.categories-new', [
     })
 
     .controller('NewCategoriesCtrl',
-        function NewCategoriesController($scope, crudService) {
+        function NewCategoriesController($scope, $rootScope, $state, crudService, SUCCESS_EVENTS) {
+            $scope.disableSlugInput = false;
             // crudService.getCategory().then(function (res) {
             //     $scope.pages = res.data;
             // });
 
             $scope.submit = function () {
-                // crudService.createMenu($scope.menu);
+                crudService.createCategory($scope.category).then(function (res) {
+                    if (res.data) {
+                        $rootScope.$broadcast(SUCCESS_EVENTS.success, 'New Page created.');
+                        $state.go('admin.categories-list');
+                    }
+                });
             };
         });
 

@@ -23,7 +23,7 @@ angular.module('app.category', [
 
     .controller('CategoryCtrl',
         function CategoryController($scope, $stateParams, $sce, pages) {
-            $scope.pages = pages.data.pages;
+            $scope.pages = pages.data;
             angular.forEach($scope.pages, function(page) {
                 page.content = $sce.trustAsHtml(page.content);
             });

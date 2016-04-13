@@ -90,10 +90,9 @@ var app = angular.module('app', [
             }
         });
 
-        crudService.getLayout().then(function(res) {
-            $scope.layout = res.data;
-            console.log($scope.layout);
-            console.log($scope.layout.enabled);
+        crudService.getConfiguration().then(function(res) {
+            $scope.configuration = res.data;
+            console.log($scope.configuration)
             // var toolbar =  $filter('filter')(res.data, {name: 'toolbar'})[0];
             // $scope.menu = toolbar.items[0].items;
         });

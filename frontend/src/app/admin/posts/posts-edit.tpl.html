@@ -12,6 +12,13 @@
             <div text-angular ng-model="page.content"></div>
             <br/>
             Slug: <input ng-model="page.slug"/>
+
+            Add to categories
+            <label ng-repeat = "category in categories">
+                <input type="checkbox" checklist-model="page.categories" checklist-value="category._id"> {{category.title}}
+                <br/>
+            </label>
+
             <input type="submit" id="submit" value="Submit"/>
         </form>
     </md-card-content>

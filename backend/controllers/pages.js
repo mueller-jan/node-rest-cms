@@ -30,6 +30,29 @@ module.exports = function () {
         }
     }, true);
 
+    //get posts from category
+    controller.addAction('GET', '/pages/categories/:id', function (req, res, next) {
+        var id = req.params.id;
+
+        if (id) {
+            Page.find({$and: [{categories: id}, {type: 'post'}]}).populate({
+                    path: 'Category',
+                    match: {age: {$gte: 21}},
+                    options: {limit: 5, sort: { 'date': -1 }}
+                })
+                .exec(function (err, list) {
+                    if (err) return next(controller.RESTError('InternalServerError', err));
+                    console.log(list)
+                    res.send(list);
+                });
+                // Page.find( { createdOn: { $lte: request.createdOnBefore } } )
+            //     .limit( 10 )
+            //     .sort( '-createdOn' )
+        } else {
+            next(controller.RESTError('InvalidArgumentError', 'Invalid id'))
+        }
+    }, false);
+
 
     //get page by id or slug
     controller.addAction('GET', '/pages/:id', function (req, res, next) {

@@ -34,6 +34,10 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/pages/' + id);
             },
 
+            createCategory: function(category) {
+                return $http.post(API_URL + '/categories', category, {headers: {'Content-Type': 'application/json'}});
+            },
+
             getCategories: function() {
                 return $http.get(API_URL + '/categories');
             },
@@ -47,7 +51,7 @@ angular.module('services.crud', ['app.config'])
             },
 
             getPagesFromCategory: function(id) {
-                return $http.get(API_URL + '/categories/' + id + '/pages');
+                return $http.get(API_URL + '/pages/categories/' + id);
             },
 
             updatePage: function (id, page) {
@@ -66,8 +70,8 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/users');
             },
 
-            getLayout: function() {
-                return $http.get(API_URL + '/layout')
+            getConfiguration: function() {
+                return $http.get(API_URL + '/configurations')
             },
 
             uploadFile: function(file) {

@@ -51,13 +51,7 @@ module.exports = function () {
     controller.addAction('GET', '/categories/:id', function(req, res, next) {
         var id = req.params.id;
         if (id) {
-            //find id or slug
-            var query = {$or: [{slug: id}]};
-            if (id.match(/^[0-9a-fA-F]{24}$/)) {
-                query.$or.push({_id: id});
-            }
-
-            Category.findOne(query)
+            Category.findOne({_id : id})
                 .exec(function (err, c) {
                 if (err) return next(err);
                 if (!c) {

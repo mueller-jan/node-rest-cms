@@ -9,7 +9,7 @@ var page = new Schema({
     content: String,
     status: String,
     type: String,
-    category: String
+    categories: [{type: String, ref: 'Category'}]
 });
 
 page.plugin(uniqueValidator);

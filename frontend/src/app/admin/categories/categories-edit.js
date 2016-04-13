@@ -20,8 +20,9 @@ angular.module('admin.categories-edit', [
     .controller('EditCategoriesCtrl',
         function EditCategoriesController($scope, $rootScope, $state, $stateParams, crudService, SUCCESS_EVENTS) {
             $scope.categoryId = $stateParams.id;
+            $scope.disableSlugInput = true;
 
-            crudService.getPages('?type=post').then(function (res) {
+            crudService.getPagesFromCategory($scope.categoryId).then(function (res) {
                 $scope.pages = res.data;
             });
 

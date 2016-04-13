@@ -35,7 +35,7 @@
 <body layout="column">
 <!--toolbar has to be included here in order to be sticky-->
 <!--sticky doesn't work well within ui-views-->
-<div ng-if="layout.header.enabled" ng-show="showToolbar" ng-include="'app/public/partials/toolbar.tpl.html'"></div>
+<div ng-if="configuration.header.enabled" ng-show="showToolbar" ng-include="'app/public/partials/toolbar.tpl.html'"></div>
 <md-content>
     <!--<md-progress-linear ng-show="loading" md-mode="indeterminate"></md-progress-linear>-->
     <div ui-view="main" layout="column"></div>
