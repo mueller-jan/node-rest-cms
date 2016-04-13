@@ -53,9 +53,7 @@ angular.module('services.crud', ['app.config'])
             //ids can be an array or a string
             getPagesFromCategory: function (ids, startDate) {
                 ids = (ids.constructor === Array) ? '?ids=' + ids.toString() : '?ids='+ids;
-                console.log(Date.parse(startDate))
                 startDate = startDate ? '&startDate=' + startDate : '';
-                console.log(API_URL + '/pages/categories' + ids + startDate)
                 return $http.get(API_URL + '/pages/categories' + ids + startDate);
             },
 

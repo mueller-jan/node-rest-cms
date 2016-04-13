@@ -38,8 +38,6 @@ module.exports = function () {
         var endDate = req.params.endDate || new Date(0);
         var limit = req.params.limit || 10;
         var sort = req.params.sort || '-date';
-        console.log("srtatasdkrfasdöf")
-        console.log(startDate)
 
         var query = {
             $and: [
@@ -49,11 +47,10 @@ module.exports = function () {
                     }
                 },
                 {type: 'post'},
-                {date: {$lt: startDate}}
+                {date: {$lt: startDate, $gt:endDate}}
             ]
         };
 
-        console.log(query)
 
         if (ids) {
             Page.find(query)
