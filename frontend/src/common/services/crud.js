@@ -5,19 +5,19 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/menus/' + id);
             },
 
-            createMenu: function(menu) {
+            createMenu: function (menu) {
                 return $http.post(API_URL + '/menus', menu, {headers: {'Content-Type': 'application/json'}});
             },
 
-            getMenus: function() {
+            getMenus: function () {
                 return $http.get(API_URL + '/menus');
             },
 
-            updateMenu: function(id, menu) {
+            updateMenu: function (id, menu) {
                 return $http.put(API_URL + '/menus/' + id, menu, {headers: {'Content-Type': 'application/json'}});
             },
 
-            deleteMenu: function(id) {
+            deleteMenu: function (id) {
                 return $http.delete(API_URL + '/menus/' + id);
             },
 
@@ -34,15 +34,15 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/pages/' + id);
             },
 
-            createCategory: function(category) {
+            createCategory: function (category) {
                 return $http.post(API_URL + '/categories', category, {headers: {'Content-Type': 'application/json'}});
             },
 
-            getCategories: function() {
+            getCategories: function () {
                 return $http.get(API_URL + '/categories');
             },
 
-            getCategory: function(id) {
+            getCategory: function (id) {
                 return $http.get(API_URL + /categories/ + id)
             },
 
@@ -50,15 +50,20 @@ angular.module('services.crud', ['app.config'])
                 return $http.put(API_URL + '/categories/' + id, category, {headers: {'Content-Type': 'application/json'}});
             },
 
-            getPagesFromCategory: function(id) {
-                return $http.get(API_URL + '/pages/categories/' + id);
+            getPagesFromCategory: function (id, startDate) {
+
+                var params = startDate ? '?startDate=' + startDate : '';
+                console.log("params");
+                console.log(params)
+                console.log(API_URL + '/pages/categories/' + id + params)
+                return $http.get(API_URL + '/pages/categories/' + id + params);
             },
 
             updatePage: function (id, page) {
                 return $http.put(API_URL + '/pages/' + id, page, {headers: {'Content-Type': 'application/json'}});
             },
 
-            deletePage: function(id) {
+            deletePage: function (id) {
                 return $http.delete(API_URL + '/pages/' + id);
             },
 
@@ -70,11 +75,11 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/users');
             },
 
-            getConfiguration: function() {
+            getConfiguration: function () {
                 return $http.get(API_URL + '/configurations')
             },
 
-            uploadFile: function(file) {
+            uploadFile: function (file) {
                 var fd = new FormData();
                 fd.append('file', file);
                 $http.post(API_URL + '/upload', fd, {

@@ -34,20 +34,29 @@ module.exports = function () {
     controller.addAction('GET', '/pages/categories/:id', function (req, res, next) {
         var id = req.params.id;
 
+        var startDate = false || req.params.startDate;
+        // console.log("SDATE")
+        // console.log(startDate)
+        //
+
+        var query;
+        console.log("GET RES")
+        if (startDate) {
+            console.log("HAS TDSATE")
+            query = {$and: [{categories: id}, {type: 'post'},  {date: {$lte: startDate}} ]}
+        } else {
+            query = {$and: [{categories: id}, {type: 'post'}]}
+        }
+
         if (id) {
-            Page.find({$and: [{categories: id}, {type: 'post'}]}).populate({
-                    path: 'Category',
-                    match: {age: {$gte: 21}},
-                    options: {limit: 5, sort: { 'date': -1 }}
-                })
+            Page.find(query)
+                .limit( 10 )
+                .sort( '-date' )
                 .exec(function (err, list) {
                     if (err) return next(controller.RESTError('InternalServerError', err));
                     console.log(list)
                     res.send(list);
                 });
-                // Page.find( { createdOn: { $lte: request.createdOnBefore } } )
-            //     .limit( 10 )
-            //     .sort( '-createdOn' )
         } else {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id'))
         }

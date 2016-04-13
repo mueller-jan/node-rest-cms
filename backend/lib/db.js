@@ -40,21 +40,20 @@ module.exports = {
                     categories: [category]
                 });
 
-                post.save(function (err) {
-                    if (err) throw err;
-                });
+                for (var i = 0; i < 1000; i++) {
+                    var post = new Page({
+                        slug: 'post'+i,
+                        content: 'content' + i,
+                        date: new Date(i*1000),
+                        title: 'post'+i,
+                        type: 'post',
+                        categories: [category]
+                    });
 
-                var post = new Page({
-                    slug: 'catpost1',
-                    date: new Date(),
-                    title: 'catpost1',
-                    type: 'post',
-                    categories: [category]
-                });
-
-                post.save(function (err) {
-                    if (err) throw err;
-                });
+                    post.save(function (err) {
+                        if (err) throw err;
+                    });
+                }
 
 
                 var page = new Page({
