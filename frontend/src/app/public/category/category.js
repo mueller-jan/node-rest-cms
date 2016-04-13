@@ -25,14 +25,15 @@ angular.module('app.category', [
         function CategoryController($scope, $stateParams, $sce, pages, crudService) {
             $scope.pages = pages.data;
             pagesToHTML($scope.pages);
-            $scope.lastDate = getLastDate();
+
 
             $scope.loadMore = function () {
+                $scope.lastDate = getLastDate();
+                console.log($scope.lastDate);
                 crudService.getPagesFromCategory($stateParams.id, Date.parse($scope.lastDate)).then(function (res) {
                     var pages = res.data;
                     pagesToHTML(pages);
                     $scope.pages = $scope.pages.concat(pages);
-                    $scope.lastDate = getLastDate();
                 });
             };
 
@@ -43,6 +44,6 @@ angular.module('app.category', [
             }
 
             function getLastDate() {
-                $scope.pages[$scope.pages.length - 1].date;
+                return $scope.pages[$scope.pages.length - 1].date;
             }
         });

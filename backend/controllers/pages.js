@@ -43,7 +43,7 @@ module.exports = function () {
         console.log("GET RES")
         if (startDate) {
             console.log("HAS TDSATE")
-            query = {$and: [{categories: id}, {type: 'post'},  {date: {$lte: startDate}} ]}
+            query = {$and: [{categories: id}, {type: 'post'},  {date: {$lt: startDate}} ]}
         } else {
             query = {$and: [{categories: id}, {type: 'post'}]}
         }
