@@ -41,6 +41,8 @@ server.post('/upload', function (req, res, next) {
 //    }
 //});
 
+
+
 //setup protected routes (authentication required)
 lib.helpers.setupRoutes(server, lib, true);
 
