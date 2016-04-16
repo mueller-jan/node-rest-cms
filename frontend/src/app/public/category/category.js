@@ -15,7 +15,7 @@ angular.module('app.category', [
             data: {pageTitle: 'category'},
             resolve: {
                 pages: function (crudService, $stateParams) {
-                    return crudService.getPagesFromCategory($stateParams.id, new Date().getTime())
+                    return crudService.getPagesFromCategory($stateParams.id, null, new Date().getTime())
                 }
             }
         });
@@ -29,8 +29,7 @@ angular.module('app.category', [
 
             $scope.loadMore = function () {
                 $scope.lastDate = getLastDate();
-                console.log($scope.lastDate);
-                crudService.getPagesFromCategory($stateParams.id, Date.parse($scope.lastDate)).then(function (res) {
+                crudService.getPagesFromCategory($stateParams.id, null, Date.parse($scope.lastDate)).then(function (res) {
                     var pages = res.data;
                     pagesToHTML(pages);
                     $scope.pages = $scope.pages.concat(pages);
@@ -44,7 +43,6 @@ angular.module('app.category', [
             }
 
             function getLastDate() {
-                console.log($scope.pages)
                 return $scope.pages[$scope.pages.length - 1].date;
             }
         });

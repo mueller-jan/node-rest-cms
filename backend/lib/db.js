@@ -32,11 +32,12 @@ module.exports = {
                     if (err) throw err;
                 });
 
+                var date = new Date();
                 for (var i = 0; i < 1000; i++) {
                     var post = new Page({
                         slug: 'post'+i,
                         content: 'content' + i,
-                        date: new Date(i*1000),
+                        date: new Date(date - i*10000000),
                         title: 'post'+i,
                         type: 'post',
                         categories: [category]

@@ -30,12 +30,22 @@ module.exports = function () {
         }
     }, true);
 
+    //get oldest post
+    //used to generate post archive
+    controller.addAction('GET', '/pages/oldest', function (req, res, next) {
+        Page.findOne({type: 'post'}, {}, {sort: {'date': 1}}, function (err, post) {
+            if (err) return next(controller.RESTError('InternalServerError', err));
+            res.send(post);
+        });
+    }, false);
+
     //get posts from category
+    //startDate = oldest
+    //endDate = highest
     controller.addAction('GET', '/pages/categories', function (req, res, next) {
         var ids = req.params.ids.split(',');
-        console.log(req.params)
-        var startDate = req.params.startDate;
-        var endDate = req.params.endDate || new Date(0);
+        var startDate = req.params.startDate || new Date(0);
+        var endDate = req.params.endDate || new Date(2020, 1, 1);
         var limit = req.params.limit || 10;
         var sort = req.params.sort || '-date';
 
@@ -43,14 +53,13 @@ module.exports = function () {
             $and: [
                 {
                     categories: {
-                        $in: ['blog']
+                        $in: ids
                     }
                 },
                 {type: 'post'},
-                {date: {$lt: startDate, $gt:endDate}}
+                {date: {$gt: startDate, $lt: endDate}}
             ]
         };
-
 
         if (ids) {
             Page.find(query)
@@ -64,7 +73,6 @@ module.exports = function () {
             next(controller.RESTError('InvalidArgumentError', 'Invalid id'))
         }
     }, false);
-
 
     //get page by id or slug
     controller.addAction('GET', '/pages/:id', function (req, res, next) {

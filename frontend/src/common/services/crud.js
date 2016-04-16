@@ -51,10 +51,16 @@ angular.module('services.crud', ['app.config'])
             },
 
             //ids can be an array or a string
-            getPagesFromCategory: function (ids, startDate) {
+            getPagesFromCategory: function (ids, startDate, endDate, limit) {
                 ids = (ids.constructor === Array) ? '?ids=' + ids.toString() : '?ids='+ids;
                 startDate = startDate ? '&startDate=' + startDate : '';
-                return $http.get(API_URL + '/pages/categories' + ids + startDate);
+                endDate = endDate ? '&endDate=' + endDate : '';
+                limit = limit ? '&limit=' + limit : '';
+                return $http.get(API_URL + '/pages/categories' + ids + startDate + endDate);
+            },
+
+            getOldestPost: function () {
+                return $http.get(API_URL + '/pages/oldest');
             },
 
             updatePage: function (id, page) {

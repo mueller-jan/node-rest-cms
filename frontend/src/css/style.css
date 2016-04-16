@@ -6,9 +6,15 @@ body.layout-column {
     background-color: #C7C7C7;
 }
 
-
 #popupContainer {
     height: 0px;
+}
+
+/*ng-click cursor*/
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
 }
 
 /*Drag and Drop functionality*/

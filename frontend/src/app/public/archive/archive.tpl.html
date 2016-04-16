@@ -1,13 +1,28 @@
 <md-card>
     <md-card-title>
         <md-card-title-text>
-            Archive
+            <h3>Archive</h3>
         </md-card-title-text>
     </md-card-title>
     <md-card-content>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+        <div layout="row">
+            <div flex="50">
+                <h4>Posts by Date</h4>
+                <div ng-repeat="dateRange in dateRanges">
+                    <a ng-href="" ng-click="loadPostsByDateRange(dateRange)">{{dateRange.text}}</a>
+                </div>
+            </div>
+            <div flex>
+                <h4>Posts by Category</h4>
+                <div ng-repeat="category in categories">
+                    <a ng-href="" ng-click="loadPostsByCategory(category._id)">{{category.title}}</a>
+                </div>
+            </div>
+            <p/>
+        </div>
     </md-card-content>
 </md-card>
+
 
 <md-card ng-repeat="page in pages">
     <md-card-title>
@@ -22,4 +37,4 @@
 </md-card>
 
 
-<span><md-button ng-click="loadMore()">Show more</md-button></span>
+<!--<span><md-button ng-click="loadMore()">Show more</md-button></span>-->
