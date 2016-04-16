@@ -10,7 +10,7 @@ server.use(restify.queryParser());
 
 //access the content of the POST and PUT requests as
 //an object, with the added bonus of autoparsing JSON strings.
-server.use(restify.bodyParser({keepExtensions: true, uploadDir: "uploads"}));
+server.use(restify.bodyParser({keepExtensions: true, uploadDir: "uploads/images"}));
 
 //Cross Origin Resource Sharing
 restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
@@ -28,6 +28,7 @@ server.use(function (req, res, next) {
 });
 
 server.post('/upload', function (req, res, next) {
+
     res.send("upload complete");
 });
 

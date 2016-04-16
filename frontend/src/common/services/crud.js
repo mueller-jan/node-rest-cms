@@ -56,7 +56,7 @@ angular.module('services.crud', ['app.config'])
                 startDate = startDate ? '&startDate=' + startDate : '';
                 endDate = endDate ? '&endDate=' + endDate : '';
                 limit = limit ? '&limit=' + limit : '';
-                return $http.get(API_URL + '/pages/categories' + ids + startDate + endDate);
+                return $http.get(API_URL + '/pages/categories' + ids + startDate + endDate + limit);
             },
 
             getOldestPost: function () {

@@ -46,7 +46,7 @@ angular.module('app.archive', [
             };
 
             $scope.loadPostsByCategory = function(categoryId) {
-                crudService.getPagesFromCategory(categoryId).then(function (res) {
+                crudService.getPagesFromCategory(categoryId, null, null, 100).then(function (res) {
                     $scope.pages =  res.data;
                     pagesToHTML($scope.pages);
                 })
