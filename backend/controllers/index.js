@@ -3,5 +3,6 @@ module.exports = {
 	menus: require("./menus"),
     users: require("./users"),
     configurations: require("./configurations"),
-    categories: require("./categories")
+    categories: require("./categories"),
+    uploads: require("./uploads")
 };

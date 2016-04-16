@@ -1,0 +1,41 @@
+{
+  file: File {
+  domain: Domain {
+  domain: null,
+  _events: [
+    Object
+  ],
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  members: [
+    Object
+  ]
+},
+_events: {},
+_eventsCount: 0,
+_maxListeners: undefined,
+size: 11163,
+path: 'uploads\\upload_2a3c481b6ba26d56b850a6d82ad09ecc.jpg',
+name: 'image.jpg',
+type: 'image/jpeg',
+hash: null,
+lastModifiedDate: Sat Apr 16 2016 16: 12: 32 GMT+0200 (Mitteleuropäische Sommerzeit),
+_writeStream: WriteStream {
+_writableState: [Object],
+writable: false,
+domain: [Object],
+_events: {
+},
+_eventsCount: 0,
+_maxListeners: undefined,
+path: 'uploads\\upload_2a3c481b6ba26d56b850a6d82ad09ecc.jpg',
+fd: null,
+flags: 'w',
+mode: 438,
+start: undefined,
+autoClose: true,
+pos: undefined,
+bytesWritten: 11163,
+closed: true}
+}
+}
