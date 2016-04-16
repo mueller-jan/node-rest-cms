@@ -18,7 +18,16 @@ angular.module('admin.media', [
     })
 
     .controller('MediaCtrl',
-        function EditPagesController($scope, crudService) {
+        function EditPagesController($scope, crudService, API_URL) {
+            $scope.imageUrls = [];
+            crudService.getImageNames().then(function (res) {
+                var names = res.data;
+                for (var i = 0; i < names.length; i++) {
+                    $scope.imageUrls.push(API_URL + '/uploads/images/' + names[i]);
+                }
+                console.log($scope.imageUrls)
+            });
+            
             $scope.upload = function() {
                 crudService.uploadFile($scope.file);
             };

@@ -52,7 +52,7 @@ angular.module('services.crud', ['app.config'])
 
             //ids can be an array or a string
             getPagesFromCategory: function (ids, startDate, endDate, limit) {
-                ids = (ids.constructor === Array) ? '?ids=' + ids.toString() : '?ids='+ids;
+                ids = (ids.constructor === Array) ? '?ids=' + ids.toString() : '?ids=' + ids;
                 startDate = startDate ? '&startDate=' + startDate : '';
                 endDate = endDate ? '&endDate=' + endDate : '';
                 limit = limit ? '&limit=' + limit : '';
@@ -81,6 +81,10 @@ angular.module('services.crud', ['app.config'])
 
             getConfiguration: function () {
                 return $http.get(API_URL + '/configurations')
+            },
+
+            getImageNames: function () {
+                return $http.get(API_URL + '/upload/images');
             },
 
             uploadFile: function (file) {

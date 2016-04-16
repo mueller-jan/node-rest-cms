@@ -23,6 +23,11 @@ lib.db.setup();
 //setup unprotected routes (no authentication required)
 lib.helpers.setupRoutes(server, lib, false);
 
+server.get(/\/uploads\//, restify.serveStatic({
+    'directory': __dirname,
+
+}));
+
 // route middleware to verify a token
 server.use(function (req, res, next) {
     lib.helpers.validateToken(req, res, next);
