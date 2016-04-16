@@ -90,7 +90,7 @@ angular.module('services.crud', ['app.config'])
             uploadFile: function (file) {
                 var fd = new FormData();
                 fd.append('file', file);
-                $http.post(API_URL + '/upload', fd, {
+                return $http.post(API_URL + '/upload', fd, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })

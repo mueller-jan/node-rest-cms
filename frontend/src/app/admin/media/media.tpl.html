@@ -11,8 +11,12 @@
     </md-card-content>
 </md-card>
 
-
-<form name="form" ng-submit="submit()">
-    <input type="file" file-model="file"/>
-    <button ng-click="upload()">upload me</button>
-</form>
+<md-card>
+    <md-card-content>
+        <form name="form" ng-submit="submit()">
+            <input type="file" file-model="file"/>
+            <button ng-click="upload()">upload me</button>
+        </form>
+        <md-progress-circular ng-show="loading" md-mode="indeterminate"></md-progress-circular>
+    </md-card-content>
+</md-card>

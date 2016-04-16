@@ -19,8 +19,9 @@ angular.module('admin.media', [
 
     .controller('MediaCtrl',
         function EditPagesController($scope, crudService, API_URL) {
-            $scope.imageUrls = [];
+
             crudService.getImageNames().then(function (res) {
+                $scope.imageUrls = [];
                 var names = res.data;
                 for (var i = 0; i < names.length; i++) {
                     $scope.imageUrls.push(API_URL + '/uploads/images/' + names[i]);
@@ -29,7 +30,18 @@ angular.module('admin.media', [
             });
             
             $scope.upload = function() {
-                crudService.uploadFile($scope.file);
+                $scope.loading = true;
+                crudService.uploadFile($scope.file).then(function(res) {
+                    $scope.loading = false;
+                    crudService.getImageNames().then(function (res) {
+                        $scope.imageUrls = [];
+                        var names = res.data;
+                        for (var i = 0; i < names.length; i++) {
+                            $scope.imageUrls.push(API_URL + '/uploads/images/' + names[i]);
+                        }
+                        console.log($scope.imageUrls)
+                    });
+                });
             };
         });
 
