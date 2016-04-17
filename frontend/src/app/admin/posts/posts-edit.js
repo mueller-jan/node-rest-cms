@@ -1,7 +1,6 @@
 angular.module('admin.posts-edit', [
         'services.crud',
         'textAngular',
-        'file-model',
         'ui.router'
     ])
 

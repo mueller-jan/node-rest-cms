@@ -1,6 +1,5 @@
 angular.module('admin.categories-edit', [
         'services.crud',
-        'file-model',
         'ui.router'
     ])
 

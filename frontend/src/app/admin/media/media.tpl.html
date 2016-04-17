@@ -14,19 +14,8 @@
 <md-card>
     <md-card-content>
         <form name="form" ng-submit="submit()">
-        <upload to="{{uploadPath}}" ng-model="files"></upload>
-            <!--<button ng-click="upload()">upload me</button>-->
+        <upload ng-model="files"></upload>
             <md-button type="submit" id="submit">Submit</md-button>
         </form>
     </md-card-content>
 </md-card>
-
-<!--<md-card>-->
-    <!--<md-card-content>-->
-        <!--<form name="form" ng-submit="submit()">-->
-            <!--<input type="file" file-model="file"/>-->
-            <!--<button ng-click="upload()">upload me</button>-->
-        <!--</form>-->
-        <!--<md-progress-circular ng-show="loading" md-mode="indeterminate"></md-progress-circular>-->
-    <!--</md-card-content>-->
-<!--</md-card>-->

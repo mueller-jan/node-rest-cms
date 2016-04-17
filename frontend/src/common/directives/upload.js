@@ -45,31 +45,6 @@ angular.module('upload', [])
                     }
                     return false;
                 });
-
-                // var upload = function(files) {
-                //     //FormData object is only supported by modern browsers
-                //     //create FormData instance and add files to it
-                //     var data = new FormData();
-                //     angular.forEach(files, function(value){
-                //         data.append("files[]", value);
-                //     });
-                //
-                //     data.append("objectId", ngModel.$viewValue);
-                //
-                //
-                //     $http({
-                //         method: 'POST',
-                //         url: attrs.to,
-                //         data: data,
-                //         headers: {'Content-Type': undefined },
-                //         transformRequest: angular.identity
-                //     }).success(function() {
-                //         console.log("Uploaded");
-                //     }).error(function() {
-                //         console.log("Error");
-                //     });
-                // };
-
             }
         };
     }]);
