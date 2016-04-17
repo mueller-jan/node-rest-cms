@@ -37,6 +37,7 @@ angular.module('admin.media', [
                 crudService.uploadFile($scope.files).then(function (res) {
                     if (res.data) {
                         $scope.loading = false;
+                        $scope.files = [];
                         crudService.getImageNames().then(function (res) {
                             $scope.imageUrls = [];
                             var names = res.data;
@@ -47,6 +48,7 @@ angular.module('admin.media', [
                     }
                 });
             };
+            
         });
 
 

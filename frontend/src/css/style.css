@@ -10,6 +10,14 @@ body.layout-column {
     height: 0px;
 }
 
+/*drag and drop upload*/
+.asset-upload {
+
+    border:solid 2px lightgrey;
+    width:200px;
+    height:200px;
+}
+
 /*ng-click cursor*/
 [ng-click],
 [data-ng-click],
