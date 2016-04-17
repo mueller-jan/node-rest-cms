@@ -87,11 +87,60 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/upload/images');
             },
 
-            uploadFile: function (file) {
-                var fd = new FormData();
-                fd.append('file', file);
-                return $http.post(API_URL + '/upload', fd, {
-                    transformRequest: angular.identity,
+            // uploadFile: function (data) {
+            //     var fd = new FormData();
+            //     fd.append('file', file);
+            //     return $http.post(API_URL + '/upload', fd, {
+            //         transformRequest: angular.identity,
+            //         headers: {'Content-Type': undefined}
+            //     })
+            // }
+
+            uploadFile: function (files) {
+                // var fd = new FormData();
+                // fd.append('file', file);
+                // console.log("crud")
+                //
+                // var data = new FormData();
+                // angular.forEach(files, function (value) {
+                //     console.log(value)
+                //     console.log(angular.toJson())
+                //     data.append("files[]", value);
+                // });
+                //
+                // console.log(data)
+
+
+                // console.log(data)
+                return $http.post(API_URL + '/upload', files, {
+                    // transformRequest: function (files) {
+                    //
+                    //     var fd = new FormData();
+                    //     angular.forEach(files, function (value, key) {
+                    //         if (value instanceof FileList) {
+                    //             if (value.length == 1) {
+                    //                 fd.append(key, value[0]);
+                    //             } else {
+                    //                 angular.forEach(value, function (file, index) {
+                    //                     fd.append(key + '_' + index, file);
+                    //                 });
+                    //             }
+                    //         } else {
+                    //             fd.append(key, value);
+                    //         }
+                    //     });
+                    //     return fd;
+                    // },
+
+                    transformRequest: function (files) {
+                        var formData = new FormData();
+                        for (var i = 0; i < files.length; i++) {
+                            //add each file to the form data and iteratively name them
+                            formData.append("file" + i, files[i]);
+                        }
+                        return formData;
+                    },
+
                     headers: {'Content-Type': undefined}
                 })
             }

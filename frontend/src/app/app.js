@@ -5,6 +5,7 @@ var app = angular.module('app', [
         'services.crud',
         'services.auth',
         'services.error',
+        'upload',
         'dndLists',
         'ngMaterial'
     ])

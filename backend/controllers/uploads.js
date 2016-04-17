@@ -11,19 +11,29 @@ module.exports = function () {
     var controller = new Uploads();
 
     controller.addAction('POST', '/upload', function (req, res, next) {
-        fs.readFile(req.files.file.path, function (err, data) {
-            var imageName = req.files.file.name;
+        var files = req.files;
+        var keys = Object.keys( files );
+        for( var i = 0,length = keys.length; i < length; i++ ) {
+            // console.log(i)
+            var file = files[keys[i]];
+            read(file);
+        }
 
-            if (!imageName) {
-                //error
-                if (err) return next(controller.RESTError('InternalServerError', err));
-            } else {
-                var newPath = __dirname + "/../uploads/images/" + imageName;
-                fs.rename(req.files.file.path, newPath, function (err) {
+        function read(file) {
+            fs.readFile(file.path, function (err, data) {
+                console.log(file.path)
+                var imageName = file.name;
+                if (!imageName) {
+                    //error
                     if (err) return next(controller.RESTError('InternalServerError', err));
-                });
-            }
-        });
+                } else {
+                    var newPath = __dirname + "/../uploads/images/" + imageName;
+                    fs.rename(file.path, newPath, function (err) {
+                        if (err) return next(controller.RESTError('InternalServerError', err));
+                    });
+                }
+            });
+        }
 
         res.send("upload complete");
     });
