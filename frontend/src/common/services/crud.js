@@ -83,8 +83,8 @@ angular.module('services.crud', ['app.config'])
                 return $http.get(API_URL + '/configurations')
             },
 
-            getImageNames: function () {
-                return $http.get(API_URL + '/upload/images');
+            getImageUrls: function () {
+                return $http.get(API_URL + '/images');
             },
 
             // uploadFile: function (data) {

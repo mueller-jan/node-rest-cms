@@ -38,13 +38,33 @@ module.exports = function () {
         res.send("upload complete");
     });
 
-    controller.addAction('GET', '/upload/images', function (req, res, next) {
+    //get list of path to all images
+    controller.addAction('GET', '/images', function (req, res, next) {
         var path = __dirname + '/../uploads/images';
         fs.readdir(path, function(err, files) {
             if (err) return next(controller.RESTError('InternalServerError', err));
+            var API_URL =  (req.isSecure()) ? 'https' : 'http' + '://' + req.headers.host;
+            for (var i = 0; i < files.length; i++) {
+                files[i] = API_URL + '/uploads/images/' + files[i];
+            }
             res.send(files);
         });
     });
+
+    controller.addAction('DEL', '/images/:id', function (req, res, next) {
+        var filename = req.params.id;
+        var path = __dirname + '/../uploads/images/' + filename;
+
+        fs.exists(path, function(exists) {
+            if(exists) {
+                fs.unlinkSync(path);
+                res.send("file deleted");
+            } else {
+                console.log('File not found, so not deleting.');
+            }
+        });
+    });
+
 
 
     // serve file via fs.readFile

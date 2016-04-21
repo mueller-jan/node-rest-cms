@@ -16,8 +16,8 @@ BaseController.prototype.setUpActions = function(server, protect) {
     this.server = server;
     var actions = protect ? this.protectedActions : this.actions;
     _.each(actions, function(act) {
-        server[act.method.toLowerCase()](act['path'], act['func'])
         console.log("setting up route " + act.method + act.path + " protected: " + protect);
+        server[act.method.toLowerCase()](act['path'], act['func'])
     })
 };
 

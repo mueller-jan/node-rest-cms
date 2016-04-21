@@ -22,13 +22,10 @@ angular.module('admin.media', [
 
             $scope.uploadPath = API_URL + '/upload'
 
-            crudService.getImageNames().then(function (res) {
-                $scope.imageUrls = [];
-                var names = res.data;
-                for (var i = 0; i < names.length; i++) {
-                    $scope.imageUrls.push(API_URL + '/uploads/images/' + names[i]);
-                }
-                console.log($scope.imageUrls)
+            crudService.getImageUrls().then(function (res) {
+                $scope.imageUrls = res.data;
+
+       
             });
 
 

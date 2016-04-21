@@ -12,7 +12,6 @@ angular.module('app.main', [
             url: '/',
             views: {
                 "main": {
-
                     templateUrl: 'app/public/main.tpl.html'
                 },
 

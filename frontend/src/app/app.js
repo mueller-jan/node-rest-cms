@@ -20,7 +20,7 @@ var app = angular.module('app', [
 
 
     .config(function appConfig($stateProvider, $urlRouterProvider) {
-        // $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
     })
 
     .config(['$httpProvider', function ($httpProvider) {
