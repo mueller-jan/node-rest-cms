@@ -7,7 +7,9 @@
     <md-card-content>
         <div ng-repeat="url in imageUrls">
             <img ng-src="{{url}}"/>
+            <md-button ng-click="deleteImage(url)">Remove</md-button>
         </div>
+
     </md-card-content>
 </md-card>
 

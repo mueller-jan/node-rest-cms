@@ -8,6 +8,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "colors": "^1.0.3",
+    "gm": "^1.22.0",
     "halson": "^2.3.1",
     "jsonwebtoken": "^5.7.0",
     "latest-version": "^2.0.0",

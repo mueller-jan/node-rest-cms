@@ -84,7 +84,13 @@ angular.module('services.crud', ['app.config'])
             },
 
             getImageUrls: function () {
-                return $http.get(API_URL + '/images');
+                return $http.get(API_URL + '/uploads/images');
+            },
+
+
+
+            deleteImage: function(url) {
+                return $http.delete(url);
             },
 
             // uploadFile: function (data) {

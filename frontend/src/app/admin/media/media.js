@@ -24,28 +24,29 @@ angular.module('admin.media', [
 
             crudService.getImageUrls().then(function (res) {
                 $scope.imageUrls = res.data;
-
-       
             });
+
+            $scope.deleteImage = function(url) {
+                crudService.deleteImage(url).then(function() {
+                    crudService.getImageUrls().then(function (res) {
+                        $scope.imageUrls = res.data;
+                    });
+                })
+            };
 
 
             $scope.submit = function () {
-                console.log($scope.files)
                 crudService.uploadFile($scope.files).then(function (res) {
                     if (res.data) {
                         $scope.loading = false;
                         $scope.files = [];
-                        crudService.getImageNames().then(function (res) {
-                            $scope.imageUrls = [];
-                            var names = res.data;
-                            for (var i = 0; i < names.length; i++) {
-                                $scope.imageUrls.push(API_URL + '/uploads/images/' + names[i]);
-                            }
+                        crudService.getImageUrls().then(function (res) {
+                            $scope.imageUrls = res.data;
                         });
                     }
                 });
             };
-            
+
         });
 
 
