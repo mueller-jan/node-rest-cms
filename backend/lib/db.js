@@ -6,6 +6,7 @@ var Configuration = require('../models/configuration');
 var Menu = require('../models/menu');
 var User = require('../models/user');
 var Category = require('../models/category');
+
 module.exports = {
     connect: function (cb) {
         mongoose.connect(config.database.host + "/" + config.database.dbname);
@@ -48,7 +49,6 @@ module.exports = {
                     });
                 }
 
-
                 var page = new Page({
                     slug: 'start',
                     date: new Date(),
@@ -80,7 +80,7 @@ module.exports = {
                 });
 
                 var configuration = new Configuration({
-                    frontpage: "http://localhost:63342/node-rest-cms/frontend/src/index.html#/page/start",
+                    frontpage: 'start',
                     selected: true,
                     header: {
                         content: 'Node CMS',
